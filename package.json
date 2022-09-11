@@ -1,0 +1,26 @@
+{
+  "name": "if-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "lint": "prettier --write . && eslint main.js --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/M-fkstv/if-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/M-fkstv/if-js/issues"
+  },
+  "homepage": "https://github.com/M-fkstv/if-js#readme",
+  "description": "",
+  "devDependencies": {
+    "eslint": "8.22.0",
+    "husky": "^8.0.1",
+    "prettier": "2.7.1"
+  }
+}
