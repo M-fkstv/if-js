@@ -43,7 +43,7 @@ console.log("---------------");
 
 const arr2 = [2, 5, 8, 15, 0, 6, 20, 3];
 for (let i = 0; i < arr2.length; i++) {
-  if (i % 2 === 0) {
+  if (arr2[i] % 2 === 0) {
     console.log(arr2[i]);
   }
 }
