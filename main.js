@@ -47,3 +47,63 @@ for (let i = 0; i < arr2.length; i++) {
     console.log(arr2[i]);
   }
 }
+console.log("---------------");
+
+const word = "шалаш";
+
+const palindrome = function (str) {
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === str[str.length - i - 1]) {
+      console.log(true);
+    } else console.log(false);
+  }
+};
+
+console.log(word);
+palindrome(word);
+
+console.log("---------------");
+
+const x = 100;
+const y = 10;
+
+const minNumber = function (n1, n2) {
+  if (n1 > n2) {
+    return n2;
+  }
+  return n1;
+};
+
+minNumber(x, y);
+
+x > y ? console.log(y) : console.log(x);
+
+const maxNumber = function (n1, n2) {
+  if (n1 > n2) {
+    console.log(n1);
+  } else console.log(n2);
+};
+
+maxNumber(x, y);
+
+x > y ? console.log(x) : console.log(y);
+
+console.log("---------------");
+
+const arr3 = [0, 6, 10, 25, 15, 60, 50, 78, 90, 100];
+
+console.log(arr3);
+const change0 = function (array) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === 0) {
+      array[i] = "zero";
+    } else if (array[i] === 100) {
+      array[i] = array[i] / 100 + "zero" + "zero";
+    } else if (array[i] % 10 === 0) {
+      array[i] = array[i] / 10 + "zero";
+    }
+  }
+  console.log(array);
+};
+
+change0(arr3);
