@@ -1,3 +1,5 @@
+import { sum } from "./module.js";
+
 //Переменные
 let user = "John Doe";
 console.log(user);
@@ -80,8 +82,9 @@ x > y ? console.log(y) : console.log(x);
 
 const maxNumber = function (n1, n2) {
   if (n1 > n2) {
-    console.log(n1);
-  } else console.log(n2);
+    return n1;
+  }
+  return n2;
 };
 
 maxNumber(x, y);
@@ -103,7 +106,46 @@ const change0 = function (array) {
       array[i] = array[i] / 10 + "zero";
     }
   }
-  console.log(array);
+  return arr3;
 };
 
 change0(arr3);
+console.log(arr3);
+
+// export function sum(n1) {
+//   return function sum(n2) {
+//     return n1 + n2;
+//   };
+// }
+// let sum = (n1) => (sum = (n2) => n1 + n2);
+
+console.log(sum(5)(2));
+
+const text1 = document.getElementById("text1");
+const text2 = document.getElementById("text2");
+const text3 = document.getElementById("text3");
+
+import { colors } from "./module.js";
+import { getColor } from "./module.js";
+
+for (let j = 0; j < colors.length; j++) {
+  text1.addEventListener("click", getColor());
+}
+for (let i = 0; i < colors.length; i++) {
+  text2.addEventListener("click", getColor());
+}
+for (let i = 0; i < colors.length; i++) {
+  text3.addEventListener("click", getColor());
+}
+
+// text1.addEventListener("click", (event) => {
+//   event.target.style.color = getColor();
+// });
+
+// text2.addEventListener("click", (event) => {
+//   event.target.style.color = "magenta";
+// });
+//
+// text3.addEventListener("click", (event) => {
+//   event.target.style.color = "magenta";
+// });
