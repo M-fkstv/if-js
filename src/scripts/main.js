@@ -112,13 +112,6 @@ const change0 = function (array) {
 change0(arr3);
 console.log(arr3);
 
-// export function sum(n1) {
-//   return function sum(n2) {
-//     return n1 + n2;
-//   };
-// }
-// let sum = (n1) => (sum = (n2) => n1 + n2);
-
 console.log(sum(5)(2));
 
 const text1 = document.getElementById("text1");
@@ -149,3 +142,71 @@ for (let i = 0; i < colors.length; i++) {
 // text3.addEventListener("click", (event) => {
 //   event.target.style.color = "magenta";
 // });
+const re = /(^\d{4})-(\d{2})-(\d{2}$)/g;
+
+const date = "2020-11-26";
+
+const newDate = date.replace(re, "$3.$2.$1");
+
+console.log(newDate);
+
+const data = [
+  {
+    country: "Russia",
+    city: "Saint Petersburg",
+    hotel: "Hotel Leopold",
+  },
+
+  {
+    country: "Spain",
+    city: "Santa Cruz de Tenerife",
+    hotel: "Apartment Sunshine",
+  },
+  {
+    country: "Slowakia",
+    city: "Vysokie Tatry",
+    hotel: "Villa Kunerad",
+  },
+  {
+    country: "Germany",
+    city: "Berlin",
+    hotel: "Hostel Friendship",
+  },
+  {
+    country: "Indonesia",
+    city: "Bali",
+    hotel: "Ubud Bali Resort&SPA",
+  },
+  {
+    country: "Netherlands",
+    city: "Rotterdam",
+    hotel: "King Kong Hostel",
+  },
+  {
+    country: "Marocco",
+    city: "Ourika",
+    hotel: "Rokoko Hotel",
+  },
+  {
+    country: "Germany",
+    city: "Berlin",
+    hotel: "Hotel Rehberge Berlin Mitte",
+  },
+];
+
+const string = "Germany";
+const search = function () {
+  for (let i = 0; i < data.length; i++) {
+    const j = data[i];
+    if (data[i].country.includes(string) === true) {
+      console.log(j.country, j.city, j.hotel);
+    }
+    if (data[i].city.includes(string) === true) {
+      console.log(j.country, j.city, j.hotel);
+    }
+    if (data[i].hotel.includes(string) === true) {
+      console.log(j.country, j.city, j.hotel);
+    }
+  }
+};
+search(string);
