@@ -142,7 +142,7 @@ for (let i = 0; i < colors.length; i++) {
 // text3.addEventListener("click", (event) => {
 //   event.target.style.color = "magenta";
 // });
-const re = /(^\d{4})-(\d{2})-(\d{2}$)/g;
+const re = /(^\d{4})-(\d{2})-(\d{2}$)/g; //Преобразование формата даты
 
 const date = "2020-11-26";
 
@@ -194,7 +194,7 @@ const data = [
   },
 ];
 
-const string = "Germany";
+const string = "Germany"; //Поиск объектов размещения
 const search = function () {
   for (let i = 0; i < data.length; i++) {
     const j = data[i];
@@ -210,3 +210,31 @@ const search = function () {
   }
 };
 search(string);
+
+const palindrome1 = () => word === word.split("").reverse().join("");
+console.log(palindrome1());
+
+console.log("---------------");
+
+import { hotels } from "./module.js";
+
+const hotelsInd = "USA"; //Поиск объектов размещения
+
+const filteredHotels = hotels.filter((item) => {
+  if (
+    item.country === hotelsInd || // можно так
+    item.city.includes(hotelsInd) === true || // можно и так
+    item.name.includes(hotelsInd) === true
+  ) {
+    console.log(item.country, item.city, item.name);
+    return `${item.country} ${item.city} ${item.name}`; // Как правильно??
+    // console.log([`${item.country} ${item.city} ${item.name}`]);
+    // return true; // {name: 'Hotel Leopold', city: 'Saint Petersburg', country: 'Russia'}
+  }
+});
+
+console.log(filteredHotels);
+
+console.log("---------------");
+
+hotels.forEach((value) => console.log(value.country));
