@@ -236,7 +236,7 @@ const filteredHotels = hotels.filter((item) => {
 console.log(filteredHotels);
 
 console.log("---------------");
-
+//
 const uniqCountry = (hotels) => {
   return hotels.reduce((acc, hotels) => {
     if (hotels.country === "USA") {
@@ -246,6 +246,32 @@ const uniqCountry = (hotels) => {
   }, []);
 };
 console.log(uniqCountry(hotels));
+
+console.log("---------------");
+console.log(hotels[8].country === hotels[16].country);
+
+const uniqCountry1 = (hotels) => {
+  return hotels.reduce(
+    (uniqCountry1, hotels) => {
+      if (hotels.country === "USA") {
+        uniqCountry1.USA.push(hotels.city);
+      }
+      if (hotels.country === "Russia") {
+        uniqCountry1.Russia.push(hotels.city);
+      }
+      if (hotels.country === "Germany") {
+        uniqCountry1.Germany.push(hotels.city);
+      }
+      return uniqCountry1;
+    },
+    {
+      USA: [],
+      Russia: [],
+      Germany: [],
+    }
+  );
+};
+console.log(uniqCountry1(hotels));
 // console.log(`${hotels[i].country}':  ${["Chicago", "Hawaii", "Miami"]} }`);
 
 import { obj1 } from "./module.js";
