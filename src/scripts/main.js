@@ -237,6 +237,15 @@ console.log(filteredHotels);
 
 console.log("---------------");
 
+const uniqCountry = (hotels) => {
+  return hotels.reduce((acc, hotels) => {
+    if (hotels.country === "USA") {
+      acc.push(hotels.city);
+    }
+    return acc;
+  }, []);
+};
+console.log(uniqCountry(hotels));
 // console.log(`${hotels[i].country}':  ${["Chicago", "Hawaii", "Miami"]} }`);
 
 import { obj1 } from "./module.js";
