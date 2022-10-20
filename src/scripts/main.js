@@ -218,7 +218,7 @@ console.log("---------------");
 
 import { hotels } from "./module.js";
 
-const hotelsInd = "USA"; //Поиск объектов размещения
+const hotelsInd = "Germany"; //Поиск объектов размещения
 
 const filteredHotels = hotels.filter((item) => {
   if (
@@ -226,7 +226,7 @@ const filteredHotels = hotels.filter((item) => {
     item.city.includes(hotelsInd) === true || // можно и так
     item.name.includes(hotelsInd) === true
   ) {
-    console.log(item.country, item.city, item.name);
+    // console.log([item.country, item.city, item.name]);
     return `${item.country} ${item.city} ${item.name}`; // Как правильно??
     // console.log([`${item.country} ${item.city} ${item.name}`]);
     // return true; // {name: 'Hotel Leopold', city: 'Saint Petersburg', country: 'Russia'}
@@ -273,43 +273,43 @@ const uniqCountry1 = (hotels) => {
 };
 console.log(uniqCountry1(hotels));
 // console.log(`${hotels[i].country}':  ${["Chicago", "Hawaii", "Miami"]} }`);
-
+//
 import { obj1 } from "./module.js";
 import { obj2 } from "./module.js";
-// import { obj3 } from "./module.js";
+import { obj3 } from "./module.js";
 
-const properties1 = Object.getOwnPropertyNames(obj1);
-const properties2 = Object.getOwnPropertyNames(obj2);
-// const properties3 = Object.getOwnPropertyNames(obj3);
-
-console.log(properties1);
-console.log(properties2);
-console.log(obj1[properties1[1]]);
-console.log(obj2[properties2[1]]);
-console.log(typeof properties1[0]);
-console.log(typeof properties2[0]);
-
-const deepEqual = (obj1, obj2) => {
-  if (properties1.length !== properties2.length) {
-    return false;
+const uniqCountry6 = hotels.reduce((acc, item) => {
+  // if (!Object.keys(acc).includes(item.country)) {
+  //   acc[item.country] = [];
+  // }
+  if (!Object.hasOwn(acc, item.country)) {
+    acc[item.country] = [];
   }
+  acc[item.country].push(item.city);
 
-  for (let i = 0; i < properties1.length; i++) {
-    if (
-      typeof properties1[i] !== "object" &&
-      typeof properties2[i] !== "object" &&
-      obj1[properties1[i]] !== obj1[properties2[i]]
-    ) {
-      return false;
+  return acc;
+}, {});
+
+console.log(uniqCountry6);
+
+const deepEqual1 = (obj1, obj2) => {
+  const isObjects = typeof obj1 === "object" && typeof obj2 === "object";
+  if (isObjects) {
+    for (const key in obj1) {
+      if (Object.hasOwn(obj1, key) === false) return false;
+      if (typeof obj1[key] === "object" && typeof obj2[key] === "object") {
+        const result = deepEqual1(obj1[key], obj2[key]);
+        if (result === false) return false;
+      } else {
+        if (obj1[key] !== obj2[key]) return false;
+      }
     }
-    if (
-      typeof properties1[i] === "object" &&
-      typeof properties2[i] === "object" &&
-      !deepEqual(obj1[properties1[i]], obj2[properties2[i]]) // Почему не работает?
-    ) {
-      return false;
-    }
+
+    return true;
+  } else {
+    return obj1 === obj2;
   }
-  return true;
 };
-console.log(deepEqual(obj1, obj2));
+
+console.log(deepEqual1(obj1, obj2));
+console.log(deepEqual1(obj1, obj3));

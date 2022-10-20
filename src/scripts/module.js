@@ -213,3 +213,41 @@ export const obj3 = {
   },
   b: "b",
 };
+// const properties1 = Object.getOwnPropertyNames(obj1);
+// const properties2 = Object.getOwnPropertyNames(obj2);
+// const properties3 = Object.getOwnPropertyNames(obj3);
+//
+// console.log(properties1);
+// console.log(properties2);
+// console.log(obj1[properties1[1]]);
+// console.log(obj2[properties2[0]]);
+// console.log(typeof properties1[0]);
+// console.log(typeof properties2[0]);
+
+// const deepEqual = (obj1, obj2) => {
+//   const properties1 = Object.getOwnPropertyNames(obj1);
+//   const properties2 = Object.getOwnPropertyNames(obj2);
+//   if (properties1.length !== properties2.length) {
+//     return false;
+//   }
+//
+//   for (let i = 0; i < properties1.length; i++) {
+//     if (
+//       typeof properties1[i] !== "object" &&
+//       typeof properties2[i] !== "object" &&
+//       obj1[properties1[i]] !== obj1[properties2[i]]
+//     ) {
+//       return false;
+//     }
+//     if (
+//       typeof properties1[i] === "object" &&
+//       typeof properties2[i] === "object"
+//       // !deepEqual(obj1[properties1[i]], obj2[properties2[i]]) // Почему не работает?
+//     ) {
+//       !deepEqual(obj1[properties1[i]], obj2[properties2[i]]);
+//       // return false;
+//     }
+//   }
+//   return true;
+// };
+// console.log(deepEqual(obj1, obj2));
