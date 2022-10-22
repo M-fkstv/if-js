@@ -282,12 +282,17 @@ const uniqCountry6 = hotels.reduce((acc, item) => {
   // if (!Object.keys(acc).includes(item.country)) {
   //   acc[item.country] = [];
   // }
-  if (!Object.hasOwn(acc, item.country)) {
-    acc[item.country] = [];
-  }
-  acc[item.country].push(item.city);
+  // if (!Object.hasOwn(acc, item.country)) {
+  //   acc[item.country] = [];
+  // }
+  // acc[item.country].push(item.city);
+  const result = { ...acc };
 
-  return acc;
+  if (!result[item.country]) {
+    result[item.country] = [];
+  }
+  result[item.country].push(item.city);
+  return result;
 }, {});
 
 console.log(uniqCountry6);
