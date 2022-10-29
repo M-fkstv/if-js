@@ -80,7 +80,7 @@ console.log(uniqCountry4);
 //
 // console.log(Object.hasOwn(obj1, "a"));
 
-const uniqCountry5 = hotels.map((item, index, hotels) => {
+const uniqCountry5 = hotels.map((item) => {
   return { [item.country]: [item.city] };
 });
 console.log(uniqCountry5);
@@ -110,7 +110,7 @@ const res = (hotels) => {
   }
   return result;
 };
-// console.log(res(hotels));
+console.log(res(hotels));
 
 const uniqCountry6 = hotels.reduce((acc, item) => {
   // if (!Object.keys(acc).includes(item.country)) {
@@ -123,4 +123,4 @@ const uniqCountry6 = hotels.reduce((acc, item) => {
 
   return acc;
 }, {});
-// console.log(uniqCountry6);
+console.log(uniqCountry6);

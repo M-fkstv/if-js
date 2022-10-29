@@ -134,7 +134,7 @@ for (let i = 0; i < colors.length; i++) {
 // text1.addEventListener("click", (event) => {
 //   event.target.style.color = getColor();
 // });
-
+//
 // text2.addEventListener("click", (event) => {
 //   event.target.style.color = "magenta";
 // });
@@ -318,3 +318,176 @@ const deepEqual1 = (obj1, obj2) => {
 
 console.log(deepEqual1(obj1, obj2));
 console.log(deepEqual1(obj1, obj3));
+
+const colors1 = {
+  data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
+  [Symbol.iterator]() {
+    return this;
+  },
+  next() {
+    if (this.current === undefined) {
+      this.current = this.from;
+    }
+    if (this.current > this.to) {
+      return {
+        done: false,
+        value: this.from,
+      };
+    }
+  },
+};
+
+console.log(colors1.data);
+for (const values of colors1.data) {
+  console.log(values);
+}
+// const changeStyle = (id) => (event) => {
+//   event.target.style.color = colors.next(id).value;
+// };
+
+// const range = {
+//   from: 1,
+//   to: 5,
+//   [Symbol.iterator]() {
+//     return this;
+//   },
+//   next() {
+//     if (this.current === undefined) {
+//       this.current = this.from;
+//     }
+//     if (this.current > this.to) {
+//       return {
+//         done: true,
+//       };
+//     }
+//     return {
+//       done: false,
+//       value: this.current++,
+//     };
+//   },
+// };
+
+// for (const num of range) {
+//   console.log(num); // 1, 2, 3, 4, 5
+// }
+// console.log(Math.max(1, 2, 3, 4, 5)); // 5
+
+const daysInMonth = 30;
+const daysInWeek = 7;
+const calendar = [];
+
+const getMonth = function (daysInMonth, daysInWeek) {
+  for (let i = 1; i <= daysInMonth; i++) {
+    calendar.push(i);
+  }
+
+  const res = [];
+  for (let i = 0; i < calendar.length; i + daysInWeek) {
+    res.push(calendar.splice(0, daysInWeek));
+  }
+  return res;
+};
+
+console.log(getMonth(daysInMonth, daysInWeek));
+
+// const getWeek = function (daysInWeek) {
+//   const res = [];
+//   for (let i = 0; i < calendar.length; i + daysInWeek) {
+//     res.push(calendar.splice(0, daysInWeek));
+//   }
+//
+//   return res;
+// };
+// console.log(getWeek(daysInWeek));
+
+import { data1 } from "./module.js";
+
+const homes = document.createElement("section");
+homes.className = "homes";
+homes.style.cssText = ` 
+  background-color: var(--bg-color);
+  padding-top: 120px;
+  padding-bottom: 120px;`;
+document.body.appendChild(homes);
+
+const h2Text = document.createElement("h2");
+h2Text.textContent = "Homes guests loves";
+h2Text.className = "h2Text";
+h2Text.style.cssText = `
+position: relative;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 500;
+  margin: 0 auto 110px;
+  color: var(--main-text);`;
+homes.appendChild(h2Text);
+
+const homesExamples = document.createElement("div");
+homesExamples.className = "homesExamples";
+homesExamples.style.cssText = `
+  position: relative;
+  max-width: 1260px;
+  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 106px auto 0;`;
+
+homes.appendChild(homesExamples);
+
+data1.forEach((item) => {
+  const homesExamplesIcons = document.createElement("div");
+  homesExamplesIcons.setAttribute("id", `${item.id}`);
+  homesExamplesIcons.className = "homes__examples__icons";
+  homesExamplesIcons.style.cssText = `width: 20%`;
+  homesExamples.appendChild(homesExamplesIcons);
+  // homesExamples.innerHTML += "homesExamplesIcons";
+
+  const homesExamplesIcon = document.createElement("img");
+  homesExamplesIcon.setAttribute(
+    "src",
+    `${item.imageUrl}`
+    // "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-leopold_mflelk.jpg"
+  );
+  homesExamplesIcon.className = "homes__examples__icon";
+  homesExamplesIcon.style.cssText = `width: 100%`;
+
+  homesExamplesIcons.appendChild(homesExamplesIcon);
+
+  const homesDescription = document.createElement("div");
+  homesDescription.className = "homesDescription";
+  homesDescription.style.cssText = `height: 120px`;
+  homesExamplesIcons.appendChild(homesDescription);
+
+  const homesDescriptionText = document.createElement("p");
+  homesDescriptionText.className = "homesDescriptionText";
+  homesDescriptionText.style.cssText = `
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--general-blue);
+  `;
+  homesDescriptionText.innerHTML = `${item.name}`;
+  homesDescription.appendChild(homesDescriptionText);
+
+  const homesDescriptionTextLastChild = document.createElement("p");
+  homesDescriptionTextLastChild.className =
+    "homes__description--text:last-of-type";
+  homesDescriptionTextLastChild.style.cssText = `color: #bfbfbf;     
+  margin-top: 20px;                                        
+  font-size: 24px;
+  `;
+  // <-- стили не применились из homesDescriptionText
+  homesDescriptionTextLastChild.innerHTML = `${item.city}, ${item.country}`;
+  homesDescriptionText.after(homesDescriptionTextLastChild);
+  homesDescription.appendChild(homesDescriptionTextLastChild);
+});
+
+console.log(homes);
+
+// const homesExamplesIcons1 = homesExamplesIcons.cloneNode(true);
+// homesExamplesIcons.after(homesExamplesIcons1);
+// const homesExamplesIcons2 = homesExamplesIcons.cloneNode(true);
+// homesExamplesIcons1.after(homesExamplesIcons2);
+// const homesExamplesIcons3 = homesExamplesIcons.cloneNode(true);
+// homesExamplesIcons2.after(homesExamplesIcons3);
