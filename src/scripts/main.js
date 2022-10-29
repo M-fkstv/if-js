@@ -341,9 +341,9 @@ console.log(colors1.data);
 for (const values of colors1.data) {
   console.log(values);
 }
-// const changeStyle = (id) => (event) => {
-//   event.target.style.color = colors.next(id).value;
-// };
+const changeStyle = (id) => (event) => {
+  event.target.style.color = colors.next(id).value;
+};
 
 // const range = {
 //   from: 1,
