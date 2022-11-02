@@ -42,7 +42,7 @@
             to live, work or just relax
           </h1>
 
-          <form class="form col-md-12">
+          <form id="form" class="form col-md-12">
             <div class="form__city col-md-4">
               <label class="form__city--label label" for="city"
                 >Your destination or hotel name</label
@@ -87,6 +87,7 @@
                 id="adults"
                 name="adults"
                 value="2"
+                disabled
               />
               <label class="adults-label person-label" for="adults"
                 >Adults</label
@@ -101,8 +102,9 @@
                 id="children"
                 name="children"
                 value="0"
+                disabled
               />
-              <label class="children-label person-label" for="children"
+              <label  class="children-label person-label" for="children"
                 >Children</label
               >
               <div class="form--splitter">
@@ -115,6 +117,7 @@
                 id="room"
                 name="room"
                 value="1"
+                disabled
               />
               <label class="room-label person-label" for="room">Room</label>
             </div>
@@ -122,6 +125,67 @@
               Search
             </button>
           </form>
+          <div class="persons">
+            <div class="persons__inputs">
+              <div class="adults__input">
+                <div>
+                  <p class="inputs__title--adult">Adults</p>
+                </div>
+                <div class="adults__inputs--counter" >
+                  <button id ="adult-remove" class="inputs__button remove--button">-</button>
+                  <span id="adults-output"  class="inputs__button--output">0</span>
+                  <button id="adult-add" class="inputs__button add--button">+</button>
+                </div>
+              </div>
+              <div class="children__input">
+                <div>
+                  <p class="inputs__title">Children</p>
+                </div>
+                <div class="adults__inputs--counter" >
+                  <button id="children-remove" class="inputs__button remove--button">-</button>
+                  <span id="children-output" class="inputs__button--output">0</span>
+                  <button id="children-add" class="inputs__button add--button">+</button>
+                </div>
+              </div>
+
+              <div class="rooms__input">
+                <div>
+                  <p class="inputs__title">Rooms</p>
+                </div>
+                <div class="adults__inputs--counter" >
+                  <button id="room-remove" class="inputs__button remove--button ">-</button>
+                  <span id="room-out" class="inputs__button--output">0</span>
+                  <button id="room-add" class="inputs__button add--button">+</button>
+                </div>
+              </div>
+              <p hidden class="children__input--subtitle">What is the age of the child you're travelling with</p>
+              <select class="children__age">
+
+                <option value="">Choose age</option>
+                <option value="0">0 year old</option>
+                <option value="1">1 year old</option>
+                <option value="2">2 years old</option>
+                <option value="3">3 years old</option>
+                <option value="4">4 years old</option>
+                <option value="5">5 years old</option>
+                <option value="6">6 years old</option>
+                <option value="7">7 years old</option>
+                <option value="8">8 years old</option>
+                <option value="9">9 years old</option>
+                <option value="10">10 years old</option>
+                <option value="11">11 years old</option>
+                <option value="12">12 years old</option>
+                <option value="13">13 years old</option>
+                <option value="14">14 years old</option>
+                <option value="15">15 years old</option>
+                <option value="16">16 years old</option>
+                <option value="17">17 years old</option>
+              </select>
+
+            </div>
+
+
+          </div>
 
           <div class="apps">
             <svg class="apps__google">
@@ -547,6 +611,8 @@
         <p class="footer__colontitul">
           © 2020 Triphouse, Inc. All rights reserved
         </p>
+
+
       </footer>
     </div>
     <!--    <script src="./node_modules/swiper/swiper-bundle.js"></script>-->

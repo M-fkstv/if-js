@@ -60,20 +60,10 @@ html {
 
 :root {
   --main-text: #383838;
-}
-:root {
   --general-blue: #3077c6;
-}
-:root {
   --animation-color: #f5bd41;
-}
-:root {
   --general-white: white;
-}
-:root {
   --bg-color: #eaf0f9;
-}
-:root {
   --swiper-navigation-size: 40px;
 }
 
@@ -1696,4 +1686,79 @@ li {
   .footer__colontitul {
     font-size: 12px;
   }
+}
+/*<<<<<<<<<<<<<<<<<<<<   MODAL WINDOW TO FORM PEOPLES INPUT   >>>>>>>>>>>>>>>>>>>>>>>>>>*/
+.persons {
+  position: relative;
+  display: none;
+}
+.persons__inputs {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 260px;
+  border-radius: 8px;
+  padding: 24px 24px 16px;
+  background-color: #ffffff;
+  position: absolute;
+  left: 59%;
+}
+.adults__input,
+.children__input,
+.rooms__input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.adults__inputs--counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputs__button {
+  height: 30px;
+  width: 30px;
+  color: var(--general-blue);
+  border: 1px solid var(--general-blue);
+  background-color: #ffffff;
+  font-size: 20px;
+}
+.inputs__button--disabled {
+  color: #808080ff;
+  border-color: #808080ff;
+  background-color: #ffffff;
+  opacity: 0.5;
+}
+.inputs__button--output {
+  display: block;
+  text-align: center;
+  width: 40px;
+  margin: 4px;
+}
+.children__age {
+  display: none;
+  border: 1px solid var(--general-blue);
+  height: 30px;
+}
+.children__active {
+  display: flex;
+  margin-bottom: 10px;
+  margin-left: -4px;
+  width: 100px;
+  font-size: 12px;
+}
+.children__input--subtitle.children__active {
+  margin-top: 20px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  width: 200px;
+}
+.toggle {
+  display: block;
+}
+input {
+  background-color: white;
 }

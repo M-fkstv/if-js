@@ -16,7 +16,6 @@ export const colors = [
 export const getColor = function () {
   let i = 0;
   return function () {
-    // console.log(colors[i]);
     this.style.color = colors[i];
     i++;
     if (i === colors.length) {
