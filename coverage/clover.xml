@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1665085534274" clover="3.2.0">
-  <project timestamp="1665085534275" name="All files">
-    <metrics statements="14" coveredstatements="8" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="2" elements="20" coveredelements="10" complexity="0" loc="14" ncloc="14" packages="1" files="1" classes="1"/>
+<coverage generated="1667044441957" clover="3.2.0">
+  <project timestamp="1667044441958" name="All files">
+    <metrics statements="15" coveredstatements="9" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="2" elements="21" coveredelements="11" complexity="0" loc="15" ncloc="15" packages="1" files="1" classes="1"/>
     <file name="module.js" path="C:\Users\User\Desktop\if\if-js\src\scripts\module.js">
-      <metrics statements="14" coveredstatements="8" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="2"/>
+      <metrics statements="15" coveredstatements="9" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="2"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
       <line num="9" count="1" type="stmt"/>
@@ -18,6 +18,7 @@
       <line num="186" count="1" type="stmt"/>
       <line num="196" count="1" type="stmt"/>
       <line num="206" count="1" type="stmt"/>
+      <line num="217" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>
