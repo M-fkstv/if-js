@@ -64,6 +64,8 @@ html {
   --animation-color: #f5bd41;
   --general-white: white;
   --bg-color: #eaf0f9;
+}
+:root {
   --swiper-navigation-size: 40px;
 }
 
