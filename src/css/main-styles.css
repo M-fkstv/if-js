@@ -1,4 +1,4 @@
-@import url(src/css/fonts.css);
+@import url(./fonts.css);
 /*@import url(../node_modules/swiper/swiper-bundle.min.css);*/
 
 * {
@@ -386,11 +386,12 @@ html {
   justify-content: space-between;
   margin: 106px auto 0;
 }
-.homes__examples__icons {
-  width: 100%;
-}
+/*.homes__examples__icons {*/
+/*  width: 100%;*/
+/*}*/
 .homes__examples__icon {
   width: 100%;
+  aspect-ratio: 1/1;
 }
 
 .homes__examples--arr {

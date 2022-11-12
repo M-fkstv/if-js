@@ -1,77 +1,3 @@
-import { data1 } from "./module.js";
-
-const homes = document.createElement("section");
-homes.classList.add("homes");
-document.body.appendChild(homes);
-
-const h2Text = document.createElement("h2");
-h2Text.textContent = "Homes guests loves";
-h2Text.classList.add("h2-text");
-h2Text.classList.add("h2-text:hover:before");
-homes.appendChild(h2Text);
-
-const homesExamples = document.createElement("div");
-homesExamples.classList.add("homes__examples");
-homesExamples.style.cssText = `flex-wrap: wrap`;
-homes.appendChild(homesExamples);
-
-data1.forEach((item) => {
-  const homesExamplesIcons = document.createElement("div");
-  homesExamplesIcons.setAttribute("id", `${item.id}`);
-  homesExamplesIcons.classList.add("homes__examples__icons");
-  homesExamplesIcons.style.cssText = `width: 20%`;
-  homesExamples.appendChild(homesExamplesIcons);
-
-  const homesExamplesIcon = document.createElement("img");
-  homesExamplesIcon.setAttribute(
-    "src",
-    `${item.imageUrl}`
-    // "https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-leopold_mflelk.jpg"
-  );
-  homesExamplesIcon.classList.add("homes__examples__icon");
-  // homesExamplesIcon.style.cssText = `width: 100%`;
-
-  homesExamplesIcons.appendChild(homesExamplesIcon);
-
-  const homesDescription = document.createElement("div");
-  homesDescription.className = "homesDescription";
-  homesDescription.style.cssText = `height: 120px`;
-  homesExamplesIcons.appendChild(homesDescription);
-
-  const homesDescriptionText = document.createElement("p");
-  homesDescriptionText.classList.add("homesDescriptionText");
-  homesDescriptionText.style.cssText = `
-  margin-top: 20px;
-  font-size: 24px;
-  font-weight: 400;
-  color: var(--general-blue);
-  `;
-  homesDescriptionText.innerHTML = `${item.name}`;
-  homesDescription.appendChild(homesDescriptionText);
-
-  const homesDescriptionTextLastChild = document.createElement("p");
-  homesDescriptionTextLastChild.classList.add(
-    "homes__description--text:last-of-type"
-  );
-  homesDescriptionTextLastChild.style.cssText = `color: #bfbfbf;
-  margin-top: 20px;
-  font-size: 24px;
-  `;
-  // <-- стили не применились из homesDescriptionText
-  homesDescriptionTextLastChild.innerHTML = `${item.city}, ${item.country}`;
-  homesDescriptionText.after(homesDescriptionTextLastChild);
-  homesDescription.appendChild(homesDescriptionTextLastChild);
-});
-
-console.log(homes);
-
-// const homesExamplesIcons1 = homesExamplesIcons.cloneNode(true);
-// homesExamplesIcons.after(homesExamplesIcons1);
-// const homesExamplesIcons2 = homesExamplesIcons.cloneNode(true);
-// homesExamplesIcons1.after(homesExamplesIcons2);
-// const homesExamplesIcons3 = homesExamplesIcons.cloneNode(true);
-// homesExamplesIcons2.after(homesExamplesIcons3);
-
 const adultAdd = document.getElementById("adult-add");
 const adultRemove = document.getElementById("adult-remove");
 const adultOut = document.getElementById("adults-output");
@@ -218,3 +144,75 @@ roomRemove.addEventListener("click", () => {
     roomAdd.classList.remove("inputs__button--disabled");
   }
 });
+
+// lesson-12
+
+fetch("https://fe-student-api.herokuapp.com/api/hotels/popular")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`${response.status}  - ${response.statusText}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data);
+    const destinations = document.querySelector(".destinations");
+    const homes = document.createElement("section");
+    homes.classList.add("homes");
+    document.body.insertBefore(homes, destinations);
+
+    const h2Text = document.createElement("h2");
+    h2Text.textContent = "Homes guests loves";
+    h2Text.classList.add("h2-text");
+    h2Text.classList.add("h2-text:hover:before");
+    homes.appendChild(h2Text);
+
+    const homesExamples = document.createElement("div");
+    homesExamples.classList.add(
+      "homes__examples",
+      "col-lg-12",
+      "col-xs-6",
+      "col-md-12"
+    );
+    homesExamples.style.cssText = `flex-wrap: wrap`;
+    homes.appendChild(homesExamples);
+
+    data.forEach((item) => {
+      const homesExamplesIcons = document.createElement("div");
+      homesExamplesIcons.setAttribute("id", `${item.id}`);
+      homesExamplesIcons.classList.add(
+        "homes__examples__icons",
+        "col-lg-3",
+        "col-md-3",
+        "col-xs-3"
+      );
+
+      homesExamples.appendChild(homesExamplesIcons);
+
+      const homesExamplesIcon = document.createElement("img");
+      homesExamplesIcon.setAttribute("src", `${item.imageUrl}`);
+      homesExamplesIcon.className = "homes__examples__icon";
+      homesExamplesIcons.appendChild(homesExamplesIcon);
+
+      const homesDescription = document.createElement("div");
+      homesDescription.className = "homes__description";
+      homesExamplesIcons.appendChild(homesDescription);
+
+      const homesDescriptionText = document.createElement("p");
+      homesDescriptionText.className = "homes__description--text";
+      homesDescriptionText.innerHTML = `${item.name}`;
+      homesDescription.appendChild(homesDescriptionText);
+
+      const homesDescriptionTextLastChild = document.createElement("p");
+      homesDescriptionTextLastChild.classList.add(
+        "homes__description--text:last-of-type"
+      );
+      homesDescriptionTextLastChild.style.cssText = `color: #bfbfbf;
+      margin-top: 20px;
+      font-size: 24px;
+      `;
+      homesDescriptionTextLastChild.innerHTML = `${item.city}, ${item.country}`;
+      homesDescriptionText.after(homesDescriptionTextLastChild);
+      homesDescription.appendChild(homesDescriptionTextLastChild);
+    });
+  });
