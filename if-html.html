@@ -42,7 +42,7 @@
             to live, work or just relax
           </h1>
 
-          <form class="form col-md-12">
+          <form id="form" class="form col-md-12">
             <div class="form__city col-md-4">
               <label class="form__city--label label" for="city"
                 >Your destination or hotel name</label
@@ -87,6 +87,7 @@
                 id="adults"
                 name="adults"
                 value="2"
+                disabled
               />
               <label class="adults-label person-label" for="adults"
                 >Adults</label
@@ -101,6 +102,7 @@
                 id="children"
                 name="children"
                 value="0"
+                disabled
               />
               <label class="children-label person-label" for="children"
                 >Children</label
@@ -115,6 +117,7 @@
                 id="room"
                 name="room"
                 value="1"
+                disabled
               />
               <label class="room-label person-label" for="room">Room</label>
             </div>
@@ -122,6 +125,90 @@
               Search
             </button>
           </form>
+          <div class="persons">
+            <div class="persons__inputs">
+              <div class="adults__input">
+                <div>
+                  <p class="inputs__title--adult">Adults</p>
+                </div>
+                <div class="adults__inputs--counter">
+                  <button
+                    id="adult-remove"
+                    class="inputs__button remove--button"
+                  >
+                    -
+                  </button>
+                  <span id="adults-output" class="inputs__button--output"
+                    >0</span
+                  >
+                  <button id="adult-add" class="inputs__button add--button">
+                    +
+                  </button>
+                </div>
+              </div>
+              <div class="children__input">
+                <div>
+                  <p class="inputs__title">Children</p>
+                </div>
+                <div class="adults__inputs--counter">
+                  <button
+                    id="children-remove"
+                    class="inputs__button remove--button"
+                  >
+                    -
+                  </button>
+                  <span id="children-output" class="inputs__button--output"
+                    >0</span
+                  >
+                  <button id="children-add" class="inputs__button add--button">
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div class="rooms__input">
+                <div>
+                  <p class="inputs__title">Rooms</p>
+                </div>
+                <div class="adults__inputs--counter">
+                  <button
+                    id="room-remove"
+                    class="inputs__button remove--button"
+                  >
+                    -
+                  </button>
+                  <span id="room-out" class="inputs__button--output">0</span>
+                  <button id="room-add" class="inputs__button add--button">
+                    +
+                  </button>
+                </div>
+              </div>
+              <p hidden class="children__input--subtitle">
+                What is the age of the child you're travelling with
+              </p>
+              <select class="children__age">
+                <option value="">Choose age</option>
+                <option value="0">0 year old</option>
+                <option value="1">1 year old</option>
+                <option value="2">2 years old</option>
+                <option value="3">3 years old</option>
+                <option value="4">4 years old</option>
+                <option value="5">5 years old</option>
+                <option value="6">6 years old</option>
+                <option value="7">7 years old</option>
+                <option value="8">8 years old</option>
+                <option value="9">9 years old</option>
+                <option value="10">10 years old</option>
+                <option value="11">11 years old</option>
+                <option value="12">12 years old</option>
+                <option value="13">13 years old</option>
+                <option value="14">14 years old</option>
+                <option value="15">15 years old</option>
+                <option value="16">16 years old</option>
+                <option value="17">17 years old</option>
+              </select>
+            </div>
+          </div>
 
           <div class="apps">
             <svg class="apps__google">
@@ -171,108 +258,6 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="homes">
-      <h2 class="h2-text">Homes guests loves</h2>
-
-      <div class="homes__examples col-lg-12 col-xs-6 col-md-12">
-        <div class="homes__examples__icons col-lg-3 col-md-3 col-xs-3">
-          <img
-            class="homes__examples__icon"
-            src="./src/images/content/Hotel%20Leopold.png"
-            alt="Hotel Leopold"
-          />
-          <div class="homes__description">
-            <p class="homes__description--text">Hotel Leopold</p>
-            <p class="homes__description--text">Saint Petersburg, Russia</p>
-          </div>
-        </div>
-        <div class="homes__examples__icons col-lg-3 col-md-3 col-xs-3">
-          <img
-            class="homes__examples__icon"
-            src="./src/images/content/Appartmen%20Sunshine.png"
-            alt="Apartment Sunshine"
-          />
-          <div class="homes__description">
-            <p class="homes__description--text">Apartment Sunshine</p>
-            <p class="homes__description--text">
-              Santa Cruz de Tenerife, Spain
-            </p>
-          </div>
-        </div>
-        <div class="homes__examples__icons col-lg-3 col-md-3 col-xs-3">
-          <img
-            class="homes__examples__icon"
-            src="./src/images/content/Villa%20Kunerad.png"
-            alt="Villa Kunerad"
-          />
-          <div class="homes__description">
-            <p class="homes__description--text">Villa Kunerad</p>
-            <p class="homes__description--text">Vysokie Tatry, Slowakia</p>
-          </div>
-        </div>
-        <div class="homes__examples__icons col-lg-3 col-md-3 col-xs-3">
-          <img
-            class="homes__examples__icon"
-            src="./src/images/content/Hostel%20Friendship.png"
-            alt="Hostel Friendship"
-          />
-          <div class="homes__description">
-            <p class="homes__description--text">Hostel Friendship</p>
-            <p class="homes__description--text">Berlin, Germany</p>
-          </div>
-        </div>
-        <div class="homes__examples--arr">
-          <svg class="arr-img">
-            <use href="./src/images/sprite.svg#arrow" />
-          </svg>
-        </div>
-      </div>
-
-      <!--      <div class="mySwiper">-->
-      <!--        <div class="swiper-wrapper col-lg-12">-->
-      <!--          <div class="swiper-slide col-lg-3 col-md-3 col-xs-3">-->
-      <!--            <img-->
-      <!--                    class="homes__examples__icon"-->
-      <!--                    src="./images/content/Hotel%20Leopold.png"-->
-      <!--                    alt="Hotel Leopold"-->
-      <!--            />-->
-      <!--            <p class="homes__description&#45;&#45;text">Hotel Leopold</p>-->
-      <!--            <p class="homes__description&#45;&#45;text">Saint Petersburg, Russia</p>-->
-      <!--          </div>-->
-
-      <!--          <div class="swiper-slide col-lg-3 col-md-3 col-xs-3">-->
-      <!--            <img-->
-      <!--                    class="homes__examples__icon"-->
-      <!--                    src="./images/content/Appartmen%20Sunshine.png"-->
-      <!--                    alt="Apartment Sunshine"-->
-      <!--            />-->
-      <!--            <p class="homes__description&#45;&#45;text">Apartment Sunshine</p>-->
-      <!--            <p class="homes__description&#45;&#45;text">Santa Cruz de Tenerife, Spain</p>-->
-      <!--          </div>-->
-
-      <!--          <div class="swiper-slide col-lg-3 col-md-3 col-xs-3">-->
-      <!--            <img-->
-      <!--                    class="homes__examples__icon"-->
-      <!--                    src="./images/content/Villa%20Kunerad.png"-->
-      <!--                    alt="Villa Kunerad"-->
-      <!--            />-->
-      <!--            <p class="homes__description&#45;&#45;text">Villa Kunerad</p>-->
-      <!--            <p class="homes__description&#45;&#45;text">Vysokie Tatry, Slowakia</p>-->
-      <!--          </div>-->
-      <!--          <div class="swiper-slide col-lg-3 col-md-3 col-xs-3">-->
-      <!--            <img-->
-      <!--                    class="homes__examples__icon"-->
-      <!--                    src="./images/content/Hostel%20Friendship.png"-->
-      <!--                    alt="Hostel Friendship"-->
-      <!--            />-->
-      <!--            <p class="homes__description&#45;&#45;text">Hostel Friendship</p>-->
-      <!--            <p class="homes__description&#45;&#45;text">Berlin, Germany</p>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--        <div class="swiper-button-next swiper-btn-next"></div>-->
-      <!--      </div>-->
     </section>
 
     <section class="destinations col-lg-12 col-md-12">
