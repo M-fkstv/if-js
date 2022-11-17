@@ -231,8 +231,14 @@ const myFirstAsyncFunc = async () => {
         return resp.json();
       })
       .then((data) => {
+        const main = document.querySelector(".main__wrapper");
+        const offer = document.querySelector(".offer");
+
+        if (main.nextElementSibling !== offer) {
+          main.nextElementSibling.remove();
+        }
+
         if (search.value !== "") {
-          const offer = document.querySelector(".offer");
           const available = document.createElement("section");
           available.classList.add("homes");
           document.body.insertBefore(available, offer);
@@ -242,6 +248,13 @@ const myFirstAsyncFunc = async () => {
           h2Text.classList.add("h2-text");
           h2Text.classList.add("h2-text:hover:before");
           available.appendChild(h2Text);
+
+          if (data.length === 0) {
+            const wrongInput = document.createElement("h5");
+            wrongInput.textContent = "Sorry, something goes wrong";
+            wrongInput.classList.add("h5");
+            h2Text.appendChild(wrongInput);
+          }
 
           const homesExamples = document.createElement("div");
           homesExamples.classList.add(
@@ -299,11 +312,3 @@ const myFirstAsyncFunc = async () => {
 };
 
 btn.addEventListener("click", myFirstAsyncFunc);
-
-function send() {
-  console.log();
-  if (search.value === "") {
-    console.log("!!!!!!!!!");
-  }
-}
-send();
