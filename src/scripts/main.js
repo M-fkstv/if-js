@@ -155,7 +155,6 @@ fetch("https://fe-student-api.herokuapp.com/api/hotels/popular")
     return response.json();
   })
   .then((data) => {
-    console.log(data);
     const destinations = document.querySelector(".destinations");
     const homes = document.createElement("section");
     homes.classList.add("homes");
@@ -216,3 +215,91 @@ fetch("https://fe-student-api.herokuapp.com/api/hotels/popular")
       homesDescription.appendChild(homesDescriptionTextLastChild);
     });
   });
+//   Lesson-13
+
+const btn = document.querySelector(".form__submit");
+const search = document.querySelector(".form__city--search");
+const url = "https://fe-student-api.herokuapp.com/api/hotels";
+
+btn.addEventListener("click", () => {
+  console.log(search.value);
+  console.log(typeof search.value);
+});
+
+// debugger;
+btn.addEventListener("click", async () => {
+  try {
+    // debugger;
+    const url1 = url + "?search=" + search.value;
+    const resp = await fetch(url1)
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((data) => {
+        const offer = document.querySelector(".offer");
+        const available = document.createElement("section");
+        // if (available === true) {
+        //   available.remove();
+        // }
+        available.classList.add("homes");
+        document.body.insertBefore(available, offer);
+
+        const h2Text = document.createElement("h2");
+        h2Text.textContent = "Available hotels";
+        h2Text.classList.add("h2-text");
+        h2Text.classList.add("h2-text:hover:before");
+        available.appendChild(h2Text);
+
+        const homesExamples = document.createElement("div");
+        homesExamples.classList.add(
+          "homes__examples",
+          "col-lg-12",
+          "col-xs-6",
+          "col-md-12"
+        );
+        homesExamples.style.cssText = `flex-wrap: wrap`;
+        available.appendChild(homesExamples);
+
+        data.forEach((item) => {
+          const homesExamplesIcons = document.createElement("div");
+          homesExamplesIcons.setAttribute("id", `${item.id}`);
+          homesExamplesIcons.classList.add(
+            "homes__examples__icons",
+            "col-lg-3",
+            "col-md-3",
+            "col-xs-3"
+          );
+
+          homesExamples.appendChild(homesExamplesIcons);
+
+          const homesExamplesIcon = document.createElement("img");
+          homesExamplesIcon.setAttribute("src", `${item.imageUrl}`);
+          homesExamplesIcon.className = "homes__examples__icon";
+          homesExamplesIcons.appendChild(homesExamplesIcon);
+
+          const homesDescription = document.createElement("div");
+          homesDescription.className = "homes__description";
+          homesExamplesIcons.appendChild(homesDescription);
+
+          const homesDescriptionText = document.createElement("p");
+          homesDescriptionText.className = "homes__description--text";
+          homesDescriptionText.innerHTML = `${item.name}`;
+          homesDescription.appendChild(homesDescriptionText);
+
+          const homesDescriptionTextLastChild = document.createElement("p");
+          homesDescriptionTextLastChild.classList.add(
+            "homes__description--text:last-of-type"
+          );
+          homesDescriptionTextLastChild.style.cssText = `color: #bfbfbf;
+      margin-top: 20px;
+      font-size: 24px;
+      `;
+          homesDescriptionTextLastChild.innerHTML = `${item.city}, ${item.country}`;
+          homesDescriptionText.after(homesDescriptionTextLastChild);
+          homesDescription.appendChild(homesDescriptionTextLastChild);
+        });
+      });
+  } catch (error) {
+    console.error(error);
+  }
+});
