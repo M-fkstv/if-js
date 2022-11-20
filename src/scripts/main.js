@@ -31,7 +31,7 @@ personForm.addEventListener(
 );
 
 adultOut.textContent = 2;
-let childrenClicks = 0;
+childrenOut.textContent = 0;
 roomOut.textContent = 1;
 
 adultAdd.addEventListener("click", () => {
@@ -65,16 +65,17 @@ adultRemove.addEventListener("click", () => {
 });
 
 childrenAdd.addEventListener("click", () => {
+  let childrenClicks = childrenOut.textContent;
   if (childrenClicks < 10) {
     childrenClicks++;
     childrenOut.textContent = childrenClicks;
     childrenQuantity.attributes[4].value = childrenClicks;
-    selectChildrenAge.classList.remove("children__active");
+    // selectChildrenAge.classList.remove("children__active");
   }
-  if (childrenClicks === 10) {
+  if (childrenClicks >= 10) {
     childrenAdd.classList.add("inputs__button--disabled");
   }
-  if (childrenClicks >= 0) {
+  if (childrenClicks >= 0 && childrenClicks <= 10) {
     selectChildrenAge.classList.add("children__active");
     document
       .querySelector(".children__input--subtitle")
@@ -84,12 +85,14 @@ childrenAdd.addEventListener("click", () => {
     const newSelect = selectChildrenAge.cloneNode(true);
     selectChildrenAge.after(newSelect);
   }
+
   if (childrenClicks === 1) {
     childrenRemove.classList.remove("inputs__button--disabled");
   }
 });
 
 childrenRemove.addEventListener("click", (event) => {
+  let childrenClicks = childrenOut.textContent;
   if (childrenClicks > 0) {
     childrenClicks--;
     childrenOut.textContent = childrenClicks;
@@ -103,6 +106,9 @@ childrenRemove.addEventListener("click", (event) => {
     childrenRemove.classList.add("inputs__button--disabled");
     document
       .querySelector(".children__input--subtitle")
+      .classList.remove("children__active");
+    document
+      .querySelector(".children__age")
       .classList.remove("children__active");
   }
   if (childrenClicks < 10) {
