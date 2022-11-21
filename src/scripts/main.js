@@ -31,7 +31,7 @@ personForm.addEventListener(
 );
 
 adultOut.textContent = 2;
-let childrenClicks = 0;
+childrenOut.textContent = 0;
 roomOut.textContent = 1;
 
 adultAdd.addEventListener("click", () => {
@@ -65,16 +65,17 @@ adultRemove.addEventListener("click", () => {
 });
 
 childrenAdd.addEventListener("click", () => {
+  let childrenClicks = childrenOut.textContent;
   if (childrenClicks < 10) {
     childrenClicks++;
     childrenOut.textContent = childrenClicks;
     childrenQuantity.attributes[4].value = childrenClicks;
-    selectChildrenAge.classList.remove("children__active");
+    // selectChildrenAge.classList.remove("children__active");
   }
-  if (childrenClicks === 10) {
+  if (childrenClicks >= 10) {
     childrenAdd.classList.add("inputs__button--disabled");
   }
-  if (childrenClicks >= 0) {
+  if (childrenClicks >= 0 && childrenClicks <= 10) {
     selectChildrenAge.classList.add("children__active");
     document
       .querySelector(".children__input--subtitle")
@@ -84,12 +85,14 @@ childrenAdd.addEventListener("click", () => {
     const newSelect = selectChildrenAge.cloneNode(true);
     selectChildrenAge.after(newSelect);
   }
+
   if (childrenClicks === 1) {
     childrenRemove.classList.remove("inputs__button--disabled");
   }
 });
 
 childrenRemove.addEventListener("click", (event) => {
+  let childrenClicks = childrenOut.textContent;
   if (childrenClicks > 0) {
     childrenClicks--;
     childrenOut.textContent = childrenClicks;
@@ -103,6 +106,9 @@ childrenRemove.addEventListener("click", (event) => {
     childrenRemove.classList.add("inputs__button--disabled");
     document
       .querySelector(".children__input--subtitle")
+      .classList.remove("children__active");
+    document
+      .querySelector(".children__age")
       .classList.remove("children__active");
   }
   if (childrenClicks < 10) {
@@ -155,7 +161,6 @@ fetch("https://fe-student-api.herokuapp.com/api/hotels/popular")
     return response.json();
   })
   .then((data) => {
-    console.log(data);
     const destinations = document.querySelector(".destinations");
     const homes = document.createElement("section");
     homes.classList.add("homes");
@@ -216,3 +221,100 @@ fetch("https://fe-student-api.herokuapp.com/api/hotels/popular")
       homesDescription.appendChild(homesDescriptionTextLastChild);
     });
   });
+//   Lesson-13
+
+const btn = document.querySelector(".form__submit");
+const search = document.querySelector(".form__city--search");
+const url = "https://fe-student-api.herokuapp.com/api/hotels";
+
+// debugger;
+const myFirstAsyncFunc = async () => {
+  try {
+    // debugger;
+    const url1 = url + "?search=" + search.value;
+    await fetch(url1)
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((data) => {
+        const main = document.querySelector(".main__wrapper");
+        const offer = document.querySelector(".offer");
+
+        if (main.nextElementSibling !== offer) {
+          main.nextElementSibling.remove();
+        }
+
+        if (search.value !== "") {
+          const available = document.createElement("section");
+          available.classList.add("homes");
+          document.body.insertBefore(available, offer);
+
+          const h2Text = document.createElement("h2");
+          h2Text.textContent = "Available hotels";
+          h2Text.classList.add("h2-text");
+          h2Text.classList.add("h2-text:hover:before");
+          available.appendChild(h2Text);
+
+          if (data.length === 0) {
+            const wrongInput = document.createElement("h5");
+            wrongInput.textContent = "Sorry, something goes wrong";
+            wrongInput.classList.add("h5");
+            h2Text.appendChild(wrongInput);
+          }
+
+          const homesExamples = document.createElement("div");
+          homesExamples.classList.add(
+            "homes__examples",
+            "col-lg-12",
+            "col-xs-6",
+            "col-md-12"
+          );
+          homesExamples.style.cssText = `flex-wrap: wrap`;
+          available.appendChild(homesExamples);
+
+          data.forEach((item) => {
+            const homesExamplesIcons = document.createElement("div");
+            homesExamplesIcons.setAttribute("id", `${item.id}`);
+            homesExamplesIcons.classList.add(
+              "homes__examples__icons",
+              "col-lg-3",
+              "col-md-3",
+              "col-xs-3"
+            );
+
+            homesExamples.appendChild(homesExamplesIcons);
+
+            const homesExamplesIcon = document.createElement("img");
+            homesExamplesIcon.setAttribute("src", `${item.imageUrl}`);
+            homesExamplesIcon.className = "homes__examples__icon";
+            homesExamplesIcons.appendChild(homesExamplesIcon);
+
+            const homesDescription = document.createElement("div");
+            homesDescription.className = "homes__description";
+            homesExamplesIcons.appendChild(homesDescription);
+
+            const homesDescriptionText = document.createElement("p");
+            homesDescriptionText.className = "homes__description--text";
+            homesDescriptionText.innerHTML = `${item.name}`;
+            homesDescription.appendChild(homesDescriptionText);
+
+            const homesDescriptionTextLastChild = document.createElement("p");
+            homesDescriptionTextLastChild.classList.add(
+              "homes__description--text:last-of-type"
+            );
+            homesDescriptionTextLastChild.style.cssText = `color: #bfbfbf;
+            margin-top: 20px;
+            font-size: 24px;
+            `;
+            homesDescriptionTextLastChild.innerHTML = `${item.city}, ${item.country}`;
+            homesDescriptionText.after(homesDescriptionTextLastChild);
+            homesDescription.appendChild(homesDescriptionTextLastChild);
+          });
+        }
+      });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+btn.addEventListener("click", myFirstAsyncFunc);

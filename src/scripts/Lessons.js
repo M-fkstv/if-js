@@ -114,12 +114,12 @@ console.log(arr3);
 
 console.log(sum(5)(2));
 
-// const text1 = document.getElementById("text1");
-// const text2 = document.getElementById("text2");
-// const text3 = document.getElementById("text3");
+const text1 = document.getElementById("text1");
+const text2 = document.getElementById("text2");
+const text3 = document.getElementById("text3");
 //
-// import { colors } from "./module.js";
-// import { getColor } from "./module.js";
+import { colors } from "./module.js";
+import { getColor } from "./module.js";
 
 // for (let j = 0; j < colors.length; j++) {
 //   text1.addEventListener("click", getColor());
@@ -321,56 +321,46 @@ console.log(deepEqual1(obj1, obj3));
 
 const colors1 = {
   data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
+
   [Symbol.iterator]() {
     return this;
   },
+
   next() {
-    if (this.current === undefined) {
-      this.current = this.from;
+    let current = 0;
+    // debugger;
+    if (this.data[current] === undefined) {
+      this.data[current] = this.data[0];
     }
-    if (this.current > this.to) {
+
+    if (current > this.data.length) {
       return {
-        done: false,
-        value: this.from,
+        done: true,
+        // value: this.data[0],
       };
     }
+
+    return {
+      done: false,
+      value: this.data[current++],
+    };
   },
 };
+console.log(colors1.next());
+console.log(colors1.next());
+console.log(colors1.next());
+console.log(colors1.next());
+console.log(colors1.next());
 
-console.log(colors1.data);
 for (const values of colors1.data) {
   console.log(values);
 }
-// const changeStyle = (id) => (event) => {              //husky ругается если не закоментировать
-//   event.target.style.color = colors.next(id).value;
-// };
-
-// const range = {
-//   from: 1,
-//   to: 5,
-//   [Symbol.iterator]() {
-//     return this;
-//   },
-//   next() {
-//     if (this.current === undefined) {
-//       this.current = this.from;
-//     }
-//     if (this.current > this.to) {
-//       return {
-//         done: true,
-//       };
-//     }
-//     return {
-//       done: false,
-//       value: this.current++,
-//     };
-//   },
-// };
-
-// for (const num of range) {
-//   console.log(num); // 1, 2, 3, 4, 5
-// }
-// console.log(Math.max(1, 2, 3, 4, 5)); // 5
+const changeStyle = (id) => (event) => {
+  event.target.style.color = colors1.next(id).value;
+};
+text1.addEventListener("click", changeStyle(text1));
+text2.addEventListener("click", changeStyle(text2));
+text3.addEventListener("click", changeStyle(text3));
 
 const daysInMonth = 30;
 const daysInWeek = 7;
@@ -378,24 +368,37 @@ const calendar = [];
 
 const getMonth = function (daysInMonth, daysInWeek) {
   for (let i = 1; i <= daysInMonth; i++) {
+    // Собирает массив
     calendar.push(i);
   }
 
   const res = [];
   for (let i = 0; i < calendar.length; i + daysInWeek) {
-    res.push(calendar.splice(0, daysInWeek));
+    res.push(calendar.splice(0, daysInWeek)); // Разбивает на недели
   }
   return res;
 };
 
 console.log(getMonth(daysInMonth, daysInWeek));
 
-// const getWeek = function (daysInWeek) {
-//   const res = [];
-//   for (let i = 0; i < calendar.length; i + daysInWeek) {
-//     res.push(calendar.splice(0, daysInWeek));
-//   }
-//
-//   return res;
-// };
-// console.log(getWeek(daysInWeek));
+// listeners
+
+const plus = document.querySelector(".plus");
+const minus = document.querySelector(".minus");
+const output = document.querySelector(".output");
+const runner = document.querySelector(".runner");
+const start = document.querySelector(".start");
+const stop = document.querySelector(".stop");
+
+plus.addEventListener("click", () => {
+  let click = output.textContent;
+  click++;
+  output.textContent = click;
+});
+minus.addEventListener("click", () => {
+  let click = output.textContent;
+  click--;
+  output.textContent = click;
+});
+
+
