@@ -15,6 +15,10 @@ const roomQuantity = document.getElementById("room");
 const childrenQuantity = document.getElementById("children");
 
 const selectChildrenAge = document.querySelector(".children__age");
+const options = new Array(17) // ДОДЕЛАТЬ!!!!!!!!!
+  .fill(0)
+  .map((item, index) => `<option>${index} years old</option>`)
+  .join("");
 
 const personForm = document.querySelector(".form__person");
 
@@ -77,6 +81,9 @@ childrenAdd.addEventListener("click", () => {
   }
   if (childrenClicks >= 0 && childrenClicks <= 10) {
     selectChildrenAge.classList.add("children__active");
+
+    // document.querySelector(".children__input--subtitle").innerHTML = `
+    //   <select> ${options}</select>`;
     document
       .querySelector(".children__input--subtitle")
       .classList.add("children__active");
@@ -84,6 +91,8 @@ childrenAdd.addEventListener("click", () => {
   if (childrenClicks > 1 && childrenClicks < 10) {
     const newSelect = selectChildrenAge.cloneNode(true);
     selectChildrenAge.after(newSelect);
+    // document.querySelector(".children__input--subtitle").innerHTML += `
+    //   <select> ${options}</select>`;
   }
 
   if (childrenClicks === 1) {
@@ -153,84 +162,85 @@ roomRemove.addEventListener("click", () => {
 
 // lesson-12
 
-fetch("https://fe-student-api.herokuapp.com/api/hotels/popular")
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(`${response.status}  - ${response.statusText}`);
-    }
-    return response.json();
-  })
-  .then((data) => {
-    const destinations = document.querySelector(".destinations");
-    const homes = document.createElement("section");
-    homes.classList.add("homes");
-    document.body.insertBefore(homes, destinations);
-
-    const h2Text = document.createElement("h2");
-    h2Text.textContent = "Homes guests loves";
-    h2Text.classList.add("h2-text");
-    h2Text.classList.add("h2-text:hover:before");
-    homes.appendChild(h2Text);
-
-    const homesExamples = document.createElement("div");
-    homesExamples.classList.add(
-      "homes__examples",
-      "col-lg-12",
-      "col-xs-6",
-      "col-md-12"
-    );
-    homesExamples.style.cssText = `flex-wrap: wrap`;
-    homes.appendChild(homesExamples);
-
-    data.forEach((item) => {
-      const homesExamplesIcons = document.createElement("div");
-      homesExamplesIcons.setAttribute("id", `${item.id}`);
-      homesExamplesIcons.classList.add(
-        "homes__examples__icons",
-        "col-lg-3",
-        "col-md-3",
-        "col-xs-3"
-      );
-
-      homesExamples.appendChild(homesExamplesIcons);
-
-      const homesExamplesIcon = document.createElement("img");
-      homesExamplesIcon.setAttribute("src", `${item.imageUrl}`);
-      homesExamplesIcon.className = "homes__examples__icon";
-      homesExamplesIcons.appendChild(homesExamplesIcon);
-
-      const homesDescription = document.createElement("div");
-      homesDescription.className = "homes__description";
-      homesExamplesIcons.appendChild(homesDescription);
-
-      const homesDescriptionText = document.createElement("p");
-      homesDescriptionText.className = "homes__description--text";
-      homesDescriptionText.innerHTML = `${item.name}`;
-      homesDescription.appendChild(homesDescriptionText);
-
-      const homesDescriptionTextLastChild = document.createElement("p");
-      homesDescriptionTextLastChild.classList.add(
-        "homes__description--text:last-of-type"
-      );
-      homesDescriptionTextLastChild.style.cssText = `color: #bfbfbf;
-      margin-top: 20px;
-      font-size: 24px;
-      `;
-      homesDescriptionTextLastChild.innerHTML = `${item.city}, ${item.country}`;
-      homesDescriptionText.after(homesDescriptionTextLastChild);
-      homesDescription.appendChild(homesDescriptionTextLastChild);
-    });
-  });
+// fetch("https://fe-student-api.herokuapp.com/api/hotels/popular")
+//   .then((response) => {
+//     if (!response.ok) {
+//       throw new Error(`${response.status}  - ${response.statusText}`);
+//     }
+//     return response.json();
+//   })
+//   .then((data) => {
+//     const destinations = document.querySelector(".destinations");
+//     const homes = document.createElement("section");
+//     homes.classList.add("homes");
+//     document.body.insertBefore(homes, destinations);
+//
+//     const h2Text = document.createElement("h2");
+//     h2Text.textContent = "Homes guests loves";
+//     h2Text.classList.add("h2-text");
+//     h2Text.classList.add("h2-text:hover:before");
+//     homes.appendChild(h2Text);
+//
+//     const homesExamples = document.createElement("div");
+//     homesExamples.classList.add(
+//       "homes__examples",
+//       "col-lg-12",
+//       "col-xs-6",
+//       "col-md-12"
+//     );
+//     homesExamples.style.cssText = `flex-wrap: wrap`;
+//     homes.appendChild(homesExamples);
+//
+//     data.forEach((item) => {
+//       // createDiv(item);
+//       const homesExamplesIcons = document.createElement("div");
+//       homesExamplesIcons.setAttribute("id", `${item.id}`);
+//       homesExamplesIcons.classList.add(
+//         "homes__examples__icons",
+//         "col-lg-3",
+//         "col-md-3",
+//         "col-xs-3"
+//       );
+//
+//       homesExamples.appendChild(homesExamplesIcons);
+//
+//       const homesExamplesIcon = document.createElement("img");
+//       homesExamplesIcon.setAttribute("src", `${item.imageUrl}`);
+//       homesExamplesIcon.className = "homes__examples__icon";
+//       homesExamplesIcons.appendChild(homesExamplesIcon);
+//
+//       const homesDescription = document.createElement("div");
+//       homesDescription.className = "homes__description";
+//       homesExamplesIcons.appendChild(homesDescription);
+//
+//       const homesDescriptionText = document.createElement("p");
+//       homesDescriptionText.className = "homes__description--text";
+//       homesDescriptionText.innerHTML = `${item.name}`;
+//       homesDescription.appendChild(homesDescriptionText);
+//
+//       const homesDescriptionTextLastChild = document.createElement("p");
+//       homesDescriptionTextLastChild.classList.add(
+//         "homes__description--text:last-of-type"
+//       );
+//       homesDescriptionTextLastChild.style.cssText = `color: #bfbfbf;
+//       margin-top: 20px;
+//       font-size: 24px;
+//       `;
+//       homesDescriptionTextLastChild.innerHTML = `${item.city}, ${item.country}`;
+//       homesDescriptionText.after(homesDescriptionTextLastChild);
+//       homesDescription.appendChild(homesDescriptionTextLastChild);
+//     });
+//   });
 //   Lesson-13
 
 const btn = document.querySelector(".form__submit");
 const search = document.querySelector(".form__city--search");
 const url = "https://fe-student-api.herokuapp.com/api/hotels";
 
-// debugger;
+// import { imgRender } from "./functions.js";
+
 const myFirstAsyncFunc = async () => {
   try {
-    // debugger;
     const url1 = url + "?search=" + search.value;
     await fetch(url1)
       .then((resp) => {
@@ -261,7 +271,6 @@ const myFirstAsyncFunc = async () => {
             wrongInput.classList.add("h5");
             h2Text.appendChild(wrongInput);
           }
-
           const homesExamples = document.createElement("div");
           homesExamples.classList.add(
             "homes__examples",
@@ -273,6 +282,7 @@ const myFirstAsyncFunc = async () => {
           available.appendChild(homesExamples);
 
           data.forEach((item) => {
+            // imgRender(item);  // everything falling with function here
             const homesExamplesIcons = document.createElement("div");
             homesExamplesIcons.setAttribute("id", `${item.id}`);
             homesExamplesIcons.classList.add(
@@ -318,3 +328,25 @@ const myFirstAsyncFunc = async () => {
 };
 
 btn.addEventListener("click", myFirstAsyncFunc);
+
+// lesson-14
+
+import { render } from "./functions.js";
+
+if (sessionStorage.length === 0) {
+  fetch("https://fe-student-api.herokuapp.com/api/hotels/popular")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`${response.status}  - ${response.statusText}`);
+      }
+      return response.json();
+    })
+
+    .then((data) => {
+      render(data);
+      sessionStorage.setItem("homes", JSON.stringify(data));
+    });
+} else {
+  sessionStorage.getItem("homes");
+  render(JSON.parse(sessionStorage.getItem("homes")));
+}

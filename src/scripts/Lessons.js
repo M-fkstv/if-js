@@ -1,4 +1,6 @@
-import { sum } from "./module.js";
+// console.log(`${hotels[i].country}':  ${["Chicago", "Hawaii", "Miami"]} }`);
+//
+import { hotels, obj1, obj2, obj3, sum } from "./module.js";
 
 //Переменные
 let user = "John Doe";
@@ -118,8 +120,8 @@ const text1 = document.getElementById("text1");
 const text2 = document.getElementById("text2");
 const text3 = document.getElementById("text3");
 //
-import { colors } from "./module.js";
-import { getColor } from "./module.js";
+// import { colors } from "./module.js";
+// import { getColor } from "./module.js";
 
 // for (let j = 0; j < colors.length; j++) {
 //   text1.addEventListener("click", getColor());
@@ -216,8 +218,6 @@ console.log(palindrome1());
 
 console.log("---------------");
 
-import { hotels } from "./module.js";
-
 const hotelsInd = "Germany"; //Поиск объектов размещения
 
 const filteredHotels = hotels.filter((item) => {
@@ -272,11 +272,6 @@ const uniqCountry1 = (hotels) => {
   );
 };
 console.log(uniqCountry1(hotels));
-// console.log(`${hotels[i].country}':  ${["Chicago", "Hawaii", "Miami"]} }`);
-//
-import { obj1 } from "./module.js";
-import { obj2 } from "./module.js";
-import { obj3 } from "./module.js";
 
 const uniqCountry6 = hotels.reduce((acc, item) => {
   // if (!Object.keys(acc).includes(item.country)) {
@@ -321,28 +316,29 @@ console.log(deepEqual1(obj1, obj3));
 
 const colors1 = {
   data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
+  current: 0, // без этого не работает 'this.current'
 
   [Symbol.iterator]() {
     return this;
   },
 
   next() {
-    let current = 0;
+    // const current = 0;
     // debugger;
-    if (this.data[current] === undefined) {
-      this.data[current] = this.data[0];
+    if (this.data[this.current] === undefined) {
+      this.data[this.current] = this.data[0];
     }
 
-    if (current > this.data.length) {
+    if (this.current > this.data.length) {
       return {
-        done: true,
-        // value: this.data[0],
+        done: false,
+        value: this.data[0],
       };
     }
 
     return {
       done: false,
-      value: this.data[current++],
+      value: this.data[this.current++],
     };
   },
 };
@@ -358,7 +354,7 @@ for (const values of colors1.data) {
 const changeStyle = (id) => (event) => {
   event.target.style.color = colors1.next(id).value;
 };
-text1.addEventListener("click", changeStyle(text1));
+text1.addEventListener("click", changeStyle(text1)); // НЕ МЕНЯЕТ ЦВЕТ!!!!!!!!
 text2.addEventListener("click", changeStyle(text2));
 text3.addEventListener("click", changeStyle(text3));
 
@@ -386,10 +382,20 @@ console.log(getMonth(daysInMonth, daysInWeek));
 const plus = document.querySelector(".plus");
 const minus = document.querySelector(".minus");
 const output = document.querySelector(".output");
-const runner = document.querySelector(".runner");
+const countdown = document.querySelector(".countdown");
 const start = document.querySelector(".start");
 const stop = document.querySelector(".stop");
+const btn = document.querySelectorAll(".btn");
 
+btn.forEach((item) => {
+  item.style.cssText = `
+    height: 50px;
+    width: 150px;
+    margin: 10px;
+    border: 1px, solid, #FFFFFF;
+    color: black;    
+`;
+});
 plus.addEventListener("click", () => {
   let click = output.textContent;
   click++;
@@ -401,4 +407,128 @@ minus.addEventListener("click", () => {
   output.textContent = click;
 });
 
+// по клику
+let timerId;
 
+function startCountdown() {
+  // ускоряется и не останавливается при повторном нажатии
+  // let sec = 0;
+  timerId = setInterval(() => {
+    // ускоряется и не останавливается при повторном нажатии
+    countdown.textContent = +countdown.textContent + 1;
+
+    // sec++;                                // сбрасывает значение
+    // countdown.textContent = sec;
+  }, 100);
+}
+
+function stopCountdown() {
+  clearInterval(timerId);
+}
+
+start.addEventListener("click", startCountdown);
+stop.addEventListener("click", stopCountdown);
+
+// при наведении
+const s = document.getElementById("timer");
+
+function startCountdown1() {
+  timerId = setInterval(() => {
+    s.textContent = +s.textContent + 1;
+  }, 100);
+}
+
+function stopCountdown1() {
+  clearInterval(timerId);
+}
+
+s.addEventListener("mouseover", startCountdown1);
+s.addEventListener("mouseout", stopCountdown1);
+
+let sec;
+// let clear;
+// function start1() {
+//   sec = 0;
+//   clear = setInterval(() => {
+//     sec++;
+//     document.getElementById("timer1").childNodes[0].textContent = +sec;
+//   }, 100);
+// }
+//
+// document.getElementById("timer1").addEventListener("click", () => {
+//   start1();
+// });
+// document.getElementById("timer1").addEventListener("mouseleave", () => {
+//   clearInterval(clear);
+// });
+
+// Секундомер из интернета для примера
+//изначальные переменные
+let min;
+min = 0;
+let hour;
+hour = 0;
+//Оставляем вашу функцию
+function init() {
+  sec = 0;
+  setInterval(tick, 1000);
+}
+
+//Основная функция tick()
+function tick() {
+  sec++;
+  if (sec >= 60) {
+    //задаем числовые параметры, меняющиеся по ходу работы программы
+    min++;
+    sec = sec - 60;
+  }
+  if (min >= 60) {
+    hour++;
+    min = min - 60;
+  }
+  if (sec < 10) {
+    //Визуальное оформление
+    if (min < 10) {
+      if (hour < 10) {
+        document.getElementById("timer1").innerHTML =
+          "0" + hour + ":0" + min + ":0" + sec;
+      } else {
+        document.getElementById("timer1").innerHTML =
+          hour + ":0" + min + ":0" + sec;
+      }
+    } else {
+      if (hour < 10) {
+        document.getElementById("timer1").innerHTML =
+          "0" + hour + ":" + min + ":0" + sec;
+      } else {
+        document.getElementById("timer1").innerHTML =
+          hour + ":" + min + ":0" + sec;
+      }
+    }
+  } else {
+    if (min < 10) {
+      if (hour < 10) {
+        document.getElementById("timer1").innerHTML =
+          "0" + hour + ":0" + min + ":" + sec;
+      } else {
+        document.getElementById("timer1").innerHTML =
+          hour + ":0" + min + ":" + sec;
+      }
+    } else {
+      if (hour < 10) {
+        document.getElementById("timer1").innerHTML =
+          "0" + hour + ":" + min + ":" + sec;
+      } else {
+        document.getElementById("timer1").innerHTML =
+          hour + ":" + min + ":" + sec;
+      }
+    }
+  }
+}
+document.querySelector(".timer1-start").addEventListener("click", () => {
+  init();
+});
+
+document.querySelector(".timer1-stop").addEventListener("click", () => {
+  clearInterval(tick); // не работает
+});
