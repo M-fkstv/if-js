@@ -15,10 +15,10 @@ const roomQuantity = document.getElementById("room");
 const childrenQuantity = document.getElementById("children");
 
 const selectChildrenAge = document.querySelector(".children__age");
-const options = new Array(17) // ДОДЕЛАТЬ!!!!!!!!!
-  .fill(0)
-  .map((item, index) => `<option>${index} years old</option>`)
-  .join("");
+//const options = new Array(17) // ДОДЕЛАТЬ!!!!!!!!!
+//   .fill(0)
+//   .map((item, index) => `<option>${index} years old</option>`)
+//   .join("");
 
 const personForm = document.querySelector(".form__person");
 
