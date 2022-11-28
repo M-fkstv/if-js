@@ -20,3 +20,17 @@ label {
   display: flex;
   flex-direction: column;
 }
+.image-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 200px;
+  border: 2px solid #000000;
+  border-radius: 5px;
+}
+.img-active {
+  width: 300px;
+  height: 200px;
+  border-radius: 5px;
+}

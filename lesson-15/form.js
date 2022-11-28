@@ -49,7 +49,6 @@ fileEl.addEventListener("change", async (event) => {
   const content = await promise;
 
   console.log(imgEl);
-  // console.log(content); //long ugly string
 });
 
 formEl.addEventListener("submit", async (event) => {
