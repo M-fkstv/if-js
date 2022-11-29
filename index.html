@@ -15,7 +15,7 @@
     <p id="text2">Text 2</p>
     <p id="text3">Text 3</p>
 
-    <div  class="persons">
+    <div class="persons">
       <div class="persons__inputs">
         <div class="adults__input">
           <div>
@@ -80,21 +80,40 @@
       </div>
     </div>
 
-
-    <button type="button" class="plus">click me</button>
+    <button type="button" class="plus btn">click me</button>
     <span class="output"> 0</span>
-    <button type="button" class="minus">click me</button>
-    <p class="runner">0</p>
-    <button type="button" class="start">start runner</button>
-    <button type="button" class="stop">stop runner</button>
+    <button type="button" class="minus btn">click me</button>
+    <br />
 
+    <button type="button" class="start btn">start runner</button>
+    <span class="countdown">0</span>
+    <button type="button" class="stop btn">stop runner</button>
 
+    <div
+      id="timer"
+      style="
+        height: 50px;
+        width: 150px;
+        margin-left: 150px;
+        background-color: deepskyblue;
+      "
+    >
+      0
+    </div>
+    <button type="button" class="timer1-start btn">timer1-start</button>
+    <div id="timer1">0</div>
+    <button type="button" class="timer1-stop btn">timer1-stop</button>
 
+    <div class="date"></div>
 
     <script type="module" src="src/scripts/Lessons.js"></script>
-<!--    <script type="module" src="src/scripts/js-classes/User.js"></script>-->
-<!--    <script type="module" src="src/scripts/main.js"></script>-->
-<!--    <script type="module" src="src/scripts/training.js"></script>-->
+    <!--    <script type="module" src="src/scripts/js-classes/User.js"></script>-->
+    <!--    <script type="module" src="src/scripts/main.js"></script>-->
+        <script type="module" src="src/scripts/training.js"></script>
     <script type="module" src="src/scripts/module.js"></script>
+    <script type="module" src="src/scripts/js-classes/Example.js"></script>
+    <script type="module" src="src/scripts/js-classes/Bus.js"></script>
+
+
   </body>
 </html>

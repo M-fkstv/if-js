@@ -124,3 +124,32 @@ const uniqCountry6 = hotels.reduce((acc, item) => {
   return acc;
 }, {});
 console.log(uniqCountry6);
+
+// Классы пример из урока
+
+import Car from "./js-classes/Example.js";
+import Bus from "./js-classes/Bus.js";
+
+const car1 = new Car({
+  make: "Model S",
+  model: "Tesla",
+  year: "2012",
+  color: "green",
+});
+
+const bus1 = new Bus({
+  make: "M-Benz",
+  model: "Sprinter",
+  year: 2020,
+  seats: 19,
+});
+
+console.log(bus1);
+console.log(Bus.getInfo());
+console.log(bus1.toStr());
+console.log(bus1.seats);
+bus1.seatsCountMessage(); //Seats: 19 ;
+
+console.log(car1);
+console.log(Car.getInfo());
+console.log(car1.toStr());
