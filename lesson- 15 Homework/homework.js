@@ -59,8 +59,8 @@ document.body.appendChild(imgEl);
 /// Second part
 
 imgBtn.addEventListener("click", (event) => {
+  event.preventDefault();
   fileEl.click();
-  event.stopPropagation();
 });
 
 const span = document.querySelector(".span");
