@@ -213,7 +213,7 @@ const search = function () {
 };
 search(string);
 
-const palindrome1 = () => word === word.split("").reverse().join("");
+export const palindrome1 = () => word === word.split("").reverse().join("");
 console.log(palindrome1());
 
 console.log("---------------");
