@@ -15,10 +15,10 @@ const roomQuantity = document.getElementById("room");
 const childrenQuantity = document.getElementById("children");
 
 const selectChildrenAge = document.querySelector(".children__age");
-const options = new Array(17) // ДОДЕЛАТЬ!!!!!!!!!
-  .fill(0)
-  .map((item, index) => `<option>${index} years old</option>`)
-  .join("");
+//const options = new Array(17) // ДОДЕЛАТЬ!!!!!!!!!
+//   .fill(0)
+//   .map((item, index) => `<option>${index} years old</option>`)
+//   .join("");
 
 const personForm = document.querySelector(".form__person");
 
@@ -31,7 +31,7 @@ personForm.addEventListener(
     persons.classList.toggle("toggle");
     // event.currentTarget.classList.toggle("toggle");
   },
-  { capture: false }
+  { capture: false },
 );
 
 adultOut.textContent = 2;
@@ -276,7 +276,7 @@ const myFirstAsyncFunc = async () => {
             "homes__examples",
             "col-lg-12",
             "col-xs-6",
-            "col-md-12"
+            "col-md-12",
           );
           homesExamples.style.cssText = `flex-wrap: wrap`;
           available.appendChild(homesExamples);
@@ -289,7 +289,7 @@ const myFirstAsyncFunc = async () => {
               "homes__examples__icons",
               "col-lg-3",
               "col-md-3",
-              "col-xs-3"
+              "col-xs-3",
             );
 
             homesExamples.appendChild(homesExamplesIcons);
@@ -310,7 +310,7 @@ const myFirstAsyncFunc = async () => {
 
             const homesDescriptionTextLastChild = document.createElement("p");
             homesDescriptionTextLastChild.classList.add(
-              "homes__description--text:last-of-type"
+              "homes__description--text:last-of-type",
             );
             homesDescriptionTextLastChild.style.cssText = `color: #bfbfbf;
             margin-top: 20px;
