@@ -94,6 +94,7 @@ formEl.addEventListener("submit", async (event) => {
 
   const fetchOptions = {
     method: "POST",
+    mode: "no-cors",
     body,
   };
 

@@ -1695,6 +1695,7 @@ li {
   position: relative;
   display: none;
 }
+
 .persons__inputs {
   display: flex;
   flex-direction: column;
@@ -1705,6 +1706,9 @@ li {
   background-color: #ffffff;
   position: absolute;
   left: 59%;
+}
+.active {
+  display: flex;
 }
 .adults__input,
 .children__input,
@@ -1746,7 +1750,7 @@ li {
   height: 30px;
 }
 .children__active {
-  display: flex;
+  display: block;
   margin-bottom: 10px;
   margin-left: -4px;
   width: 100px;
@@ -1764,4 +1768,31 @@ li {
 }
 input {
   background-color: white;
+}
+.stt {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--bg-color);
+  background-color: #f3f3f4;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+}
+.stt:before {
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  border: 2px solid #10367c;
+  border-right: 0;
+  border-top: 0;
+  top: 40%;
+  left: 35%;
+  transform: rotate(145deg) skew(20deg);
 }
