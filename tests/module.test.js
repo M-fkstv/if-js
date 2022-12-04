@@ -1,4 +1,4 @@
-import { sum } from "../src/scripts/module";
+import { sum } from "../src/scripts/module.js";
 // import { formEl } from "../lesson- 15 Homework/homework";
 // import { colors } from "./module.js";
 // import { getColor } from "./module.js";
