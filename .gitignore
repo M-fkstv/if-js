@@ -1,4 +1,5 @@
 .idea/
 node_modules/
 lesson-15
-
+coverage
+BOM

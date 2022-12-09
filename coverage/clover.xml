@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1669715856305" clover="3.2.0">
-  <project timestamp="1669715856306" name="All files">
+<coverage generated="1670183459180" clover="3.2.0">
+  <project timestamp="1670183459180" name="All files">
     <metrics statements="15" coveredstatements="9" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="2" elements="21" coveredelements="11" complexity="0" loc="15" ncloc="15" packages="1" files="1" classes="1"/>
     <file name="module.js" path="C:\Users\User\Desktop\if\if-js\src\scripts\module.js">
       <metrics statements="15" coveredstatements="9" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="2"/>
