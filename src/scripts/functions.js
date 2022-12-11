@@ -10,7 +10,7 @@ export function imgRender(data) {
                  }" class="homes__examples__icons col-lg-3 col-md-3 col-xs-3">
                     <img src="${
                       item.imageUrl
-                    }"  alt="${"is this legal???"}" class="homes__examples__icon" /> 
+                    }"  alt="${"is this legal???"}" class="homes__examples__icon col-lg-3" /> 
                         <div class="homes__description">
                              <p class="homes__description--text">${
                                item.name

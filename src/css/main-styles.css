@@ -386,12 +386,19 @@ html {
   justify-content: space-between;
   margin: 106px auto 0;
 }
-/*.homes__examples__icons {*/
-/*  width: 100%;*/
-/*}*/
+.homes__examples__icons {
+  width: 295px;
+  overflow: hidden;
+  /*aspect-ratio: 1/1;*/
+}
+
 .homes__examples__icon {
   width: 100%;
   aspect-ratio: 1/1;
+  transition: 0.5s;
+}
+.homes__examples__icon:hover {
+  scale: 1.1;
 }
 
 .homes__examples--arr {
@@ -1026,10 +1033,13 @@ li {
     gap: 0;
   }
 
-  .homes__examples__icons:nth-child(4) {
-    display: none;
+  /*.homes__examples__icons:nth-child(4) {*/
+  /*  display: none;*/
+  /*}*/
+  .homes__examples__icon {
+    width: 80%;
+    aspect-ratio: 1/1;
   }
-
   .homes__description {
     height: 80px;
   }
@@ -1037,6 +1047,7 @@ li {
   .homes__description--text {
     font-size: 16px;
     /*font-weight: 400;*/
+    margin-top: 8px;
   }
   .homes__description--text:last-of-type {
     font-size: 14px;

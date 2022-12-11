@@ -54,7 +54,7 @@ personForm.addEventListener(
     // persons.classList.toggle("toggle"); // Основной вариант
     // event.currentTarget.classList.toggle("toggle");
   },
-  { capture: true },
+  { capture: true }
 );
 //
 // document.body.addEventListener(
@@ -159,7 +159,7 @@ childrenRemove.addEventListener("click", () => {
   document
     .querySelector(".children__input--subtitle")
     .removeChild(
-      document.querySelector(".children__input--subtitle").lastChild,
+      document.querySelector(".children__input--subtitle").lastChild
     );
 });
 
@@ -202,7 +202,7 @@ const url = new URL("https://if-student-api.onrender.com/api/hotels");
 
 const myFirstAsyncFunc = async () => {
   const childrenQuan = Array.from(
-    document.querySelector(".children__input--subtitle").children,
+    document.querySelector(".children__input--subtitle").children
   ).map((item) => {
     return item.value.replace(/\D/g, "");
   });
@@ -246,7 +246,7 @@ const myFirstAsyncFunc = async () => {
             "homes__examples",
             "col-lg-12",
             "col-xs-6",
-            "col-md-12",
+            "col-md-12"
           );
           homesExamples.style.cssText = `flex-wrap: wrap`;
           available.appendChild(homesExamples);
@@ -255,7 +255,7 @@ const myFirstAsyncFunc = async () => {
             // imgRender() выводит элементы в debugger, но не отрисовывает на странице
             homesExamples.innerHTML += `
                  <div id="${item.id}" class="homes__examples__icons col-lg-3 col-md-3 col-xs-3">
-                    <img src="${item.imageUrl}"  alt="${item.name}, ${item.city}" class="homes__examples__icon" />
+                    <img src="${item.imageUrl}"  alt="${item.name}, ${item.city}" class="homes__examples__icon col-lg-3" />
                         <div class="homes__description">
                              <p class="homes__description--text">${item.name}</p>
                              <p class="homes__description--text">${item.city}, ${item.country}</p>
