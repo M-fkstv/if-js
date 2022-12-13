@@ -159,7 +159,7 @@ childrenRemove.addEventListener("click", () => {
   document
     .querySelector(".children__input--subtitle")
     .removeChild(
-      document.querySelector(".children__input--subtitle").lastChild
+      document.querySelector(".children__input--subtitle").lastChild,
     );
 });
 
