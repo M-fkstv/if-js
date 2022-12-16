@@ -1,4 +1,4 @@
-import { imgRender, render } from "./rendering.js";
+import { imgRender, sectionRender } from "./rendering.js";
 import { adultQuantity, roomQuantity } from "./main.js";
 
 const baseUrl = new URL(
@@ -22,12 +22,15 @@ export const popularHotelsRender = async () => {
       })
 
       .then((data) => {
-        render(data);
+        sectionRender(data);
         sessionStorage.setItem("homes", JSON.stringify(data));
       });
   } else {
     sessionStorage.getItem("homes");
-    render(JSON.parse(sessionStorage.getItem("homes")));
+    sectionRender(
+      JSON.parse(sessionStorage.getItem("homes")),
+      document.querySelector(".destinations")
+    );
   }
 };
 
@@ -76,12 +79,12 @@ export const availableHotelsRender = async () => {
           available.classList.add("homes");
           document.body.insertBefore(available, offer);
 
-          const h2Text = document.createElement("h2");
-          h2Text.innerHTML = `<h2 class="h2-text">Available hotels</h2>`;
-          available.appendChild(h2Text);
+          // const h2Text = document.createElement("h2");
+          available.innerHTML = `<h2 class="h2-text">Available hotels</h2>`;
+          // available.appendChild(h2Text);
 
           if (data.length === 0) {
-            h2Text.innerHTML = `<h2 class="h2-text">Available hotels
+            available.innerHTML = `<h2 class="h2-text">Available hotels
                   <h5 class="h5">Please, enter Your destination or hotel name</h5>
                 </h2>`;
           }

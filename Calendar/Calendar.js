@@ -6,30 +6,47 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
   }
 
   const month = [];
-  for (let i = 1; i <= daysInMonth; i++) {
+  for (let i = 0; i < daysInMonth; i++) {
     // Собирает массив
-    month.push(i);
+    month[i] = {
+      dayOfMonth: i + 1,
+      notCurrentMonth: false,
+      // selectedDay: true,
+    };
   }
+  console.log(month);
 
   //Временная переменная, добавляет дни из предыдущего месяца в начало
-  const temp = [...month.slice(-dayOfWeek), ...month]; // ,...calendar.slice(0, dayOfWeek)
+  // const addToBegin = [...month.slice(month.length - dayOfWeek)];
+  const addToBegin = JSON.parse(
+    JSON.stringify(month.slice(month.length - dayOfWeek))
+  );
+  const temp = [...addToBegin, ...month];
+  // const addToEnd = [...month.slice(0, daysInWeek - (temp.length % daysInWeek))]; //добавляет дни в конец
+  // Why [...] doesn't work???
+  const addToEnd = JSON.parse(
+    JSON.stringify(month.slice(0, daysInWeek - (temp.length % daysInWeek)))
+  );
+  const temp1 = [...addToBegin, ...month, ...addToEnd];
+  console.log(temp1);
+
+  addToBegin.forEach((item) => {
+    item.notCurrentMonth = true;
+  });
+
+  addToEnd.forEach((item) => {
+    item.notCurrentMonth = true;
+  });
 
   const calendarMonth = [];
-  for (let i = 0; i < temp.length; i + daysInWeek) {
-    calendarMonth.push(temp.splice(0, daysInWeek));
+  for (let i = 0; i < temp1.length; i + daysInWeek) {
+    calendarMonth.push(temp1.splice(0, daysInWeek));
     // Разбивает на недели
-  }
-
-  for (let i = 1; i < daysInWeek; i++) {
-    if (calendarMonth.slice(-1)[0].length < daysInWeek) {
-      calendarMonth.slice(-1)[0].push(i);
-    }
-    //Добавляет дни в конец месяца
   }
 
   return calendarMonth;
 };
 
-const calendarMonth = getCalendarMonth(30, 7, 4);
+const calendarMonth = getCalendarMonth(30, 7, 2);
 
 console.log(calendarMonth);

@@ -1,6 +1,10 @@
 import { popularHotelsRender, availableHotelsRender } from "./fethces.js";
 
-popularHotelsRender();
+const btn = document.querySelector(".form__submit");
+
+btn.addEventListener("click", availableHotelsRender);
+
+await popularHotelsRender();
 
 const adultAdd = document.getElementById("adult-add");
 const adultRemove = document.getElementById("adult-remove");
@@ -31,6 +35,14 @@ const personForm = document.querySelector(".form__person");
 const scrollToTop = document.querySelector(".stt");
 const persons = document.querySelector(".persons");
 
+// Listeners
+
+btn.addEventListener("click", () => {
+  if (persons.classList.contains("active")) {
+    persons.classList.remove("active");
+  }
+});
+
 document.addEventListener("scroll", () => {
   if (window.scrollY >= 1000) {
     scrollToTop.style.cssText = `display: block`;
@@ -43,31 +55,28 @@ scrollToTop.addEventListener("click", () => {
   window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
 });
 
-personForm.addEventListener("click", (event) => {
-  console.log("target", event.target);
-  console.log("currentTarget", event.currentTarget);
-
-  if (!persons.classList.contains("active")) {
-    persons.classList.add("active");
-  } else {
-    persons.classList.remove("active");
+personForm.addEventListener(
+  "click",
+  () => {
+    persons.classList.toggle("active");
+  },
+  true
+);
+//
+document.body.addEventListener("click", (event) => {
+  if (
+    !persons.contains(event.target) &&
+    event.target.parentElement !== personForm &&
+    event.target !== personForm
+  ) {
+    persons.classList.remove("active"); // если форму поменять на div
   }
-
-  // persons.classList.toggle("toggle"); // Основной вариант
-  // event.currentTarget.classList.toggle("toggle");
 });
-//
-// document.body.addEventListener(
-//   "click",
-//   (event) => {
-//     // ДОДЕЛАТЬ!!!!!
-//
-//     if (event.target !== personForm) {
-//       document.querySelector(".persons__inputs").classList.remove("active"); // если форму поменять на div
-//     }
-//   },
-//   { capture: true }
-// );
+document.body.addEventListener("keyup", (event) => {
+  if (event.key === "Escape") {
+    persons.classList.remove("active"); // если форму поменять на div
+  }
+});
 
 adultOut.textContent = 2;
 childrenOut.textContent = 0;
@@ -159,7 +168,7 @@ childrenRemove.addEventListener("click", () => {
   document
     .querySelector(".children__input--subtitle")
     .removeChild(
-      document.querySelector(".children__input--subtitle").lastChild,
+      document.querySelector(".children__input--subtitle").lastChild
     );
 });
 
@@ -191,16 +200,5 @@ roomRemove.addEventListener("click", () => {
   }
   if (roomClicks < 30) {
     roomAdd.classList.remove("inputs__button--disabled");
-  }
-});
-
-const btn = document.querySelector(".form__submit");
-
-btn.addEventListener("click", availableHotelsRender);
-// blockRender();
-
-btn.addEventListener("click", () => {
-  if (persons.classList.contains("active")) {
-    persons.classList.remove("active");
   }
 });
