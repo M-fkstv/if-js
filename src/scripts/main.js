@@ -43,31 +43,28 @@ scrollToTop.addEventListener("click", () => {
   window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
 });
 
-personForm.addEventListener("click", (event) => {
-  console.log("target", event.target);
-  console.log("currentTarget", event.currentTarget);
-
-  if (!persons.classList.contains("active")) {
-    persons.classList.add("active");
-  } else {
-    persons.classList.remove("active");
+personForm.addEventListener(
+  "click",
+  () => {
+    persons.classList.toggle("active");
+  },
+  true
+);
+//
+document.body.addEventListener("click", (event) => {
+  if (
+    !persons.contains(event.target) &&
+    event.target.parentElement !== personForm &&
+    event.target !== personForm
+  ) {
+    persons.classList.remove("active"); // если форму поменять на div
   }
-
-  // persons.classList.toggle("toggle"); // Основной вариант
-  // event.currentTarget.classList.toggle("toggle");
 });
-//
-// document.body.addEventListener(
-//   "click",
-//   (event) => {
-//     // ДОДЕЛАТЬ!!!!!
-//
-//     if (event.target !== personForm) {
-//       document.querySelector(".persons__inputs").classList.remove("active"); // если форму поменять на div
-//     }
-//   },
-//   { capture: true }
-// );
+document.body.addEventListener("keyup", (event) => {
+  if (event.key === "Escape") {
+    persons.classList.remove("active"); // если форму поменять на div
+  }
+});
 
 adultOut.textContent = 2;
 childrenOut.textContent = 0;
