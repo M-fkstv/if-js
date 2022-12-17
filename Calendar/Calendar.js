@@ -1,6 +1,12 @@
 // CALENDAR
 
-const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
+const getCalendarMonth = (
+  daysInMonth,
+  daysInWeek,
+  dayOfWeek,
+  checkInDate,
+  checkOutDate
+) => {
   if (dayOfWeek >= daysInWeek) {
     throw new Error("Error");
   }
@@ -11,7 +17,7 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
     month[i] = {
       dayOfMonth: i + 1,
       notCurrentMonth: false,
-      // selectedDay: true,
+      selectedDay: false,
     };
   }
   console.log(month);
@@ -38,6 +44,13 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
     item.notCurrentMonth = true;
   });
 
+  for (let i = checkInDate; i <= checkOutDate; i++) {
+    temp1[i + 1].selectedDay = true;
+  }
+  for (const days of temp1) {
+    console.log(days);
+  }
+
   const calendarMonth = [];
   for (let i = 0; i < temp1.length; i + daysInWeek) {
     calendarMonth.push(temp1.splice(0, daysInWeek));
@@ -47,6 +60,6 @@ const getCalendarMonth = (daysInMonth, daysInWeek, dayOfWeek) => {
   return calendarMonth;
 };
 
-const calendarMonth = getCalendarMonth(30, 7, 2);
+const calendarMonth = getCalendarMonth(30, 7, 2, 8, 15);
 
 console.log(calendarMonth);
