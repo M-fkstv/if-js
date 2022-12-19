@@ -1,10 +1,22 @@
-import { bubblesObj } from "./main.js";
+// lesson-16
+// сортировка массива отелей по имени
+function sortHotelsByName(arr) {
+  const bubblesArr = [...arr];
+  for (let i = 0; i < bubblesArr.length - 1; i++) {
+    for (let j = 0; j < bubblesArr.length - 1 - i; j++) {
+      if (bubblesArr[j].name > bubblesArr[j + 1].name) {
+        const temp = bubblesArr[j + 1];
+        bubblesArr[j + 1] = bubblesArr[j];
+        bubblesArr[j] = temp;
+      }
+    }
+  }
+  return bubblesArr;
+}
 
-const homesExamples = document.createElement("div");
-
-export function imgRender(data) {
-  bubblesObj(data).forEach((item) => {
-    homesExamples.innerHTML += `
+export function imgRender(data, elem) {
+  sortHotelsByName(data).forEach((item) => {
+    elem.innerHTML += `
                  <div id="${
                    item.id
                  }" class="homes__examples__icons col-lg-3 col-md-3 col-xs-3">
@@ -31,11 +43,10 @@ export function render(data) {
   document.body.insertBefore(homes, destinations);
 
   const h2Text = document.createElement("h2");
-  h2Text.textContent = "Homes guests loves";
-  h2Text.classList.add("h2-text");
-  h2Text.classList.add("h2-text:hover:before");
+  h2Text.innerHTML = `<h2 class="h2-text">Homes guests loves</h2>`;
   homes.appendChild(h2Text);
 
+  const homesExamples = document.createElement("div");
   homesExamples.classList.add(
     "homes__examples",
     "col-lg-12",
@@ -45,5 +56,5 @@ export function render(data) {
   homesExamples.style.cssText = `flex-wrap: wrap`;
   homes.appendChild(homesExamples);
 
-  imgRender(data);
+  imgRender(data, homesExamples);
 }

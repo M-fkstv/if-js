@@ -1,3 +1,7 @@
+import { popularHotelsRender, availableHotelsRender } from "./fethces.js";
+
+popularHotelsRender();
+
 const adultAdd = document.getElementById("adult-add");
 const adultRemove = document.getElementById("adult-remove");
 const adultOut = document.getElementById("adults-output");
@@ -10,8 +14,8 @@ const roomAdd = document.getElementById("room-add");
 const roomRemove = document.getElementById("room-remove");
 const roomOut = document.getElementById("room-out");
 
-const adultQuantity = document.getElementById("adults");
-const roomQuantity = document.getElementById("room");
+export const adultQuantity = document.getElementById("adults");
+export const roomQuantity = document.getElementById("room");
 const childrenQuantity = document.getElementById("children");
 
 const selectChildrenAge = document.createElement("select");
@@ -41,33 +45,26 @@ scrollToTop.addEventListener("click", () => {
 
 personForm.addEventListener(
   "click",
-  (event) => {
-    console.log("target", event.target);
-    console.log("currentTarget", event.currentTarget);
-
-    if (!persons.classList.contains("active")) {
-      persons.classList.add("active");
-    } else {
-      persons.classList.remove("active");
-    }
-
-    // persons.classList.toggle("toggle"); // Основной вариант
-    // event.currentTarget.classList.toggle("toggle");
+  () => {
+    persons.classList.toggle("active");
   },
-  { capture: true }
+  true,
 );
 //
-// document.body.addEventListener(
-//   "click",
-//   (event) => {
-//     // ДОДЕЛАТЬ!!!!!
-//
-//     if (event.target !== personForm) {
-//       document.querySelector(".persons__inputs").classList.remove("active"); // если форму поменять на div
-//     }
-//   },
-//   { capture: true }
-// );
+document.body.addEventListener("click", (event) => {
+  if (
+    !persons.contains(event.target) &&
+    event.target.parentElement !== personForm &&
+    event.target !== personForm
+  ) {
+    persons.classList.remove("active"); // если форму поменять на div
+  }
+});
+document.body.addEventListener("keyup", (event) => {
+  if (event.key === "Escape") {
+    persons.classList.remove("active"); // если форму поменять на div
+  }
+});
 
 adultOut.textContent = 2;
 childrenOut.textContent = 0;
@@ -159,7 +156,7 @@ childrenRemove.addEventListener("click", () => {
   document
     .querySelector(".children__input--subtitle")
     .removeChild(
-      document.querySelector(".children__input--subtitle").lastChild
+      document.querySelector(".children__input--subtitle").lastChild,
     );
 });
 
@@ -195,126 +192,12 @@ roomRemove.addEventListener("click", () => {
 });
 
 const btn = document.querySelector(".form__submit");
-const search = document.querySelector(".form__city--search");
-const url = new URL("https://if-student-api.onrender.com/api/hotels");
 
-// import { imgRender } from "./functions.js"; // imgRender() выводит элементы в debugger, но не отрисовывает на странице
-
-const myFirstAsyncFunc = async () => {
-  const childrenQuan = Array.from(
-    document.querySelector(".children__input--subtitle").children
-  ).map((item) => {
-    return item.value.replace(/\D/g, "");
-  });
-
-  url.searchParams.set("search", `${search.value}`);
-  url.searchParams.set("adults", `${adultQuantity.value}`);
-  url.searchParams.set("children", `${childrenQuan.join(",")}`);
-  url.searchParams.set("rooms", `${roomQuantity.value}`);
-  try {
-    await fetch(url)
-      .then((resp) => {
-        return resp.json();
-      })
-      .then((data) => {
-        const main = document.querySelector(".main__wrapper");
-        const offer = document.querySelector(".offer");
-
-        if (main.nextElementSibling !== offer) {
-          main.nextElementSibling.remove();
-        }
-
-        if (search.value !== "") {
-          const available = document.createElement("section");
-          available.classList.add("homes");
-          document.body.insertBefore(available, offer);
-
-          const h2Text = document.createElement("h2");
-          h2Text.textContent = "Available hotels";
-          h2Text.classList.add("h2-text");
-          h2Text.classList.add("h2-text:hover:before");
-          available.appendChild(h2Text);
-
-          if (data.length === 0) {
-            const wrongInput = document.createElement("h5");
-            wrongInput.textContent = "Sorry, something goes wrong";
-            wrongInput.classList.add("h5");
-            h2Text.appendChild(wrongInput);
-          }
-          const homesExamples = document.createElement("div");
-          homesExamples.classList.add(
-            "homes__examples",
-            "col-lg-12",
-            "col-xs-6",
-            "col-md-12"
-          );
-          homesExamples.style.cssText = `flex-wrap: wrap`;
-          available.appendChild(homesExamples);
-
-          data.forEach((item) => {
-            // imgRender() выводит элементы в debugger, но не отрисовывает на странице
-            homesExamples.innerHTML += `
-                 <div id="${item.id}" class="homes__examples__icons col-lg-3 col-md-3 col-xs-3">
-                    <img src="${item.imageUrl}"  alt="${item.name}, ${item.city}" class="homes__examples__icon col-lg-3" />
-                        <div class="homes__description">
-                             <p class="homes__description--text">${item.name}</p>
-                             <p class="homes__description--text">${item.city}, ${item.country}</p>
-                        </div>
-                 </div>
-              `;
-          });
-        }
-      });
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-btn.addEventListener("click", myFirstAsyncFunc);
+btn.addEventListener("click", availableHotelsRender);
+// blockRender();
 
 btn.addEventListener("click", () => {
   if (persons.classList.contains("active")) {
     persons.classList.remove("active");
   }
 });
-
-// lesson-14
-
-import { render } from "./functions.js";
-
-if (sessionStorage.length === 0) {
-  fetch("https://if-student-api.onrender.com/api/hotels/popular")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`${response.status}  - ${response.statusText}`);
-      }
-      return response.json();
-    })
-
-    .then((data) => {
-      render(data);
-      sessionStorage.setItem("homes", JSON.stringify(data));
-    });
-} else {
-  sessionStorage.getItem("homes");
-  render(JSON.parse(sessionStorage.getItem("homes")));
-}
-
-// lesson-16
-// сортировка массива отелей по имени
-
-export function bubblesObj(arr) {
-  const bubblesArr = [...arr];
-
-  for (let i = 0; i < bubblesArr.length - 1; i++) {
-    for (let j = 0; j < bubblesArr.length - 1 - i; j++) {
-      if (bubblesArr[j].name > bubblesArr[j + 1].name) {
-        const temp = bubblesArr[j + 1];
-        bubblesArr[j + 1] = bubblesArr[j];
-        bubblesArr[j] = temp;
-      }
-    }
-  }
-
-  return bubblesArr;
-}
