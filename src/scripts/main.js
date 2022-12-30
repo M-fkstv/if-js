@@ -1,6 +1,6 @@
 import { popularHotelsRender, availableHotelsRender } from "./fethces.js";
 
-popularHotelsRender();
+await popularHotelsRender();
 
 const adultAdd = document.getElementById("adult-add");
 const adultRemove = document.getElementById("adult-remove");
@@ -48,7 +48,7 @@ personForm.addEventListener(
   () => {
     persons.classList.toggle("active");
   },
-  true,
+  true
 );
 //
 document.body.addEventListener("click", (event) => {
@@ -156,7 +156,7 @@ childrenRemove.addEventListener("click", () => {
   document
     .querySelector(".children__input--subtitle")
     .removeChild(
-      document.querySelector(".children__input--subtitle").lastChild,
+      document.querySelector(".children__input--subtitle").lastChild
     );
 });
 

@@ -19,10 +19,10 @@ export function imgRender(data, elem) {
     elem.innerHTML += `
                  <div id="${
                    item.id
-                 }" class="homes__examples__icons col-lg-3 col-md-3 col-xs-3">
+                 }" class="homes__examples__icons swiper-slide  col-lg-3 col-md-3 col-xs-3">
                     <img src="${
                       item.imageUrl
-                    }"  alt="${"is this legal???"}" class="homes__examples__icon col-lg-3" /> 
+                    }"  alt="${"is this legal???"}" class="col-lg-3 homes__examples__icon " />
                         <div class="homes__description">
                              <p class="homes__description--text">${
                                item.name
@@ -31,7 +31,7 @@ export function imgRender(data, elem) {
                                item.city
                              }, ${item.country}</p>
                         </div>
-                 </div>      
+                 </div>
               `;
   });
 }
@@ -42,19 +42,26 @@ export function render(data) {
   homes.classList.add("homes");
   document.body.insertBefore(homes, destinations);
 
-  const h2Text = document.createElement("h2");
-  h2Text.innerHTML = `<h2 class="h2-text">Homes guests loves</h2>`;
-  homes.appendChild(h2Text);
+  homes.innerHTML += `<h2 class="h2-text">Homes guests loves</h2>`;
 
-  const homesExamples = document.createElement("div");
-  homesExamples.classList.add(
-    "homes__examples",
-    "col-lg-12",
-    "col-xs-6",
-    "col-md-12"
-  );
-  homesExamples.style.cssText = `flex-wrap: wrap`;
-  homes.appendChild(homesExamples);
+  if (data.length > 4) {
+    homes.innerHTML += `  
+                <div class="additional-wrapper">
+                  <div class="s-button-prev"></div>
+                  <div class="s-button-next"></div>
+                  <div class="homes__examples swiper col-lg-12 col-xs-6 col-md-12"></div>
+               </div>
+                `;
+  } else {
+    homes.innerHTML += `<div class="homes__examples swiper col-lg-12 col-xs-6 col-md-12"></div>`;
+  }
 
-  imgRender(data, homesExamples);
+  const homesExamples = document.querySelector(".homes__examples");
+
+  const swipeWrapper = document.createElement("div");
+  swipeWrapper.classList.add("swiper-wrapper");
+  swipeWrapper.id = "swiper#2";
+  homesExamples.appendChild(swipeWrapper);
+
+  imgRender(data, swipeWrapper);
 }

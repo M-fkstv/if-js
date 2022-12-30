@@ -1,5 +1,6 @@
 import { imgRender, render } from "./rendering.js";
 import { adultQuantity, roomQuantity } from "./main.js";
+import { swiperConfig } from "./swiper.js";
 
 const baseUrl = new URL(
   "https://if-student-api.onrender.com/api/hotels/popular"
@@ -20,14 +21,17 @@ export const popularHotelsRender = async () => {
         }
         return response.json();
       })
-
       .then((data) => {
         render(data);
         sessionStorage.setItem("homes", JSON.stringify(data));
+        // imgRender(data)
+        swiperConfig("swiper#2");
       });
   } else {
     sessionStorage.getItem("homes");
     render(JSON.parse(sessionStorage.getItem("homes")));
+    // imgRender(data)
+    swiperConfig("swiper#2");
   }
 };
 
@@ -63,39 +67,51 @@ export const availableHotelsRender = async () => {
         return resp.json();
       })
       .then((data) => {
+        console.log(data.length);
         console.log(url);
         const main = document.querySelector(".main__wrapper");
         const offer = document.querySelector(".offer");
 
-        if (main.nextElementSibling !== offer) {
-          main.nextElementSibling.remove();
-        }
+        main.nextElementSibling !== offer
+          ? main.nextElementSibling.remove()
+          : false;
 
         if (search.value !== "") {
           const available = document.createElement("section");
           available.classList.add("homes");
           document.body.insertBefore(available, offer);
 
-          const h2Text = document.createElement("h2");
-          h2Text.innerHTML = `<h2 class="h2-text">Available hotels</h2>`;
-          available.appendChild(h2Text);
+          available.innerHTML = `<h2 class="h2-text">Available hotels</h2>`;
+
+          if (data.length > 4) {
+            available.innerHTML += `
+                <div class="additional-wrapper">
+                  <div class="s-button-prev"></div>
+                  <div class="s-button-next"></div>
+                  <div class="homes__examples swiper col-lg-12 col-xs-6 col-md-12"></div>
+               </div>
+                `;
+          } else {
+            available.innerHTML += `<div class="homes__examples col-lg-12 col-xs-6 col-md-12"></div>`;
+          }
+
+          const availableExamples = document.querySelector(".homes__examples");
 
           if (data.length === 0) {
-            h2Text.innerHTML = `<h2 class="h2-text">Available hotels
-                  <h5 class="h5">Please, enter Your destination or hotel name</h5>
+            available.innerHTML = `<h2 class="h2-text">Available hotels <h5 class="h5">Please, enter Your destination or hotel name</h5>
                 </h2>`;
           }
-          const availableExamples = document.createElement("div");
-          availableExamples.classList.add(
-            "homes__examples",
-            "col-lg-12",
-            "col-xs-6",
-            "col-md-12"
-          );
-          availableExamples.style.cssText = `flex-wrap: wrap`;
-          available.appendChild(availableExamples);
 
-          imgRender(data, availableExamples);
+          const swipeWrapper = document.createElement("div");
+          swipeWrapper.id = "swiper#1";
+          swipeWrapper.classList.add("swiper-wrapper");
+          availableExamples.appendChild(swipeWrapper);
+
+          imgRender(data, swipeWrapper);
+
+          data.length > 4
+            ? swiperConfig("swiper#1")
+            : (swipeWrapper.style.cssText = ` gap: 16px`);
         }
       });
   } catch (error) {
